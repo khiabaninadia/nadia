@@ -594,14 +594,15 @@ const DEF={v:1,updatedAt:0,start:null,config:{
   {id:'iron',name:'آهن',g:'med'},{id:'inos',name:'اینوزیتول',g:'med'},{id:'duta',name:'دوتاستراید',g:'med'},
   {id:'sol',name:'محلول پوستی',g:'skin'},{id:'dex',name:'دکسپانتنول',g:'skin'},{id:'moist',name:'آبرسان / مرطوب‌کننده',g:'skin'},{id:'adap',name:'آداپالن (شب)',g:'skin'},{id:'hair',name:'Hair Growth',g:'skin'},
   {id:'eng',name:'مطالعه زبان',g:'lang',kind:'hours'},
-  {id:'ai',name:'Elements of AI',g:'learn'},{id:'read',name:'کتاب خواندن',g:'learn'},
+  {id:'ai',name:'Elements of AI',g:'learn'},{id:'read',name:'کتاب خواندن',g:'learn'},{id:'ps',name:'یادگیری فتوشاپ',g:'art'},
   {id:'gm',name:'GM',g:'x'},{id:'post',name:'حداقل یک پست',g:'x'}],
  weekly:[{id:'gym',name:'باشگاه',target:3,days:[]},{id:'cls',name:'کلاس زبان',target:2,days:[2,4]}],
  food:[{id:'egg',name:'۴ تخم‌مرغ'},{id:'meat',name:'۱۰۰ گرم گوشت'},{id:'chk',name:'۱۰۰ گرم مرغ'},{id:'tuna',name:'یک تن ماهی کامل'},{id:'pb',name:'کره بادام‌زمینی'},{id:'salad',name:'سالاد'}]
 },lp:{start:null,titles:{},log:{}},days:{},tasks:[],library:[],skills:[
  {id:'sk-en',name:'انگلیسی',habit:'eng',steps:[]},
  {id:'sk-ai',name:'Elements of AI',habit:'ai',steps:[{id:'c1',t:'فصل ۱: What is AI?'},{id:'c2',t:'فصل ۲: AI problem solving'},{id:'c3',t:'فصل ۳: Real world AI'},{id:'c4',t:'فصل ۴: Machine learning'},{id:'c5',t:'فصل ۵: Neural networks'},{id:'c6',t:'فصل ۶: Implications'}]},
- {id:'sk-mj',name:'Midjourney',habit:'',steps:[]}]};
+ {id:'sk-mj',name:'Midjourney',habit:'',steps:[]},
+ {id:'sk-ps',name:'فتوشاپ',habit:'ps',steps:[{id:'ps1',t:'قسمت ۱: Photoshop for Complete Beginners',done:true,url:'https://youtu.be/xTzvQkOll2U'},{id:'ps2',t:'قسمت ۲: Master Layers'},{id:'ps3',t:'قسمت ۳: Opacity vs Fill'},{id:'ps4',t:'قسمت ۴: Layer Mask'},{id:'ps5',t:'قسمت ۵: Blending Modes'},{id:'ps6',t:'قسمت ۶: Selections'},{id:'ps7',t:'قسمت ۷: Remove Tool'},{id:'ps8',t:'قسمت ۸: Blend If Explained'},{id:'ps9',t:'قسمت ۹: Master Filters'},{id:'ps10',t:'قسمت ۱۰: How to Save & Export'},{id:'ps11',t:'قسمت ۱۱: Intro to Camera Raw'},{id:'ps12',t:'قسمت ۱۲: Master Brush Tool from Start to Finish'},{id:'ps13',t:'قسمت ۱۳: Master New Hue/Saturation'}]}]};
 const clone=o=>JSON.parse(JSON.stringify(o));
 const uid=p=>p+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
 function normalize(s){const d=clone(DEF);s=s&&typeof s==='object'?s:{};const hadCfg=!!s.config,oldCv=s.config&&s.config.cv;s.config=Object.assign(d.config,s.config||{});s.days=s.days||{};s.v=1;
@@ -610,6 +611,9 @@ function normalize(s){const d=clone(DEF);s=s&&typeof s==='object'?s:{};const had
   if(gi>=0)c.groups.splice(gi,1,...add);else c.groups.push(...add);
   c.habits.forEach(h=>{if(h.g==='grow')h.g=h.id==='art'?'art':'learn'});c.cv=2}
  s.lp=Object.assign({start:null,titles:{},log:{}},s.lp&&typeof s.lp==='object'?s.lp:{});if(!s.lp.titles)s.lp.titles={};if(!s.lp.log)s.lp.log={};if(!Array.isArray(s.tasks))s.tasks=[];if(!Array.isArray(s.library))s.library=[];if(!Array.isArray(s.skills))s.skills=d.skills;s.skills=s.skills.filter(k=>k.id!=='sk-pr'&&String(k.name).trim().toLowerCase()!=='premiere');
+ if(!s.config.groups.some(g=>g.id==='art'))s.config.groups.push({id:'art',name:'هنر',icon:'🎨',c:'var(--pine)'});
+ if(!s.config.habits.some(h=>h.id==='ps'))s.config.habits.push({id:'ps',name:'یادگیری فتوشاپ',g:'art'});
+ if(!s.skills.some(k=>k.id==='sk-ps'))s.skills.push({id:'sk-ps',name:'فتوشاپ',habit:'ps',steps:[{id:'ps1',t:'قسمت ۱: Photoshop for Complete Beginners',done:true,url:'https://youtu.be/xTzvQkOll2U'},{id:'ps2',t:'قسمت ۲: Master Layers'},{id:'ps3',t:'قسمت ۳: Opacity vs Fill'},{id:'ps4',t:'قسمت ۴: Layer Mask'},{id:'ps5',t:'قسمت ۵: Blending Modes'},{id:'ps6',t:'قسمت ۶: Selections'},{id:'ps7',t:'قسمت ۷: Remove Tool'},{id:'ps8',t:'قسمت ۸: Blend If Explained'},{id:'ps9',t:'قسمت ۹: Master Filters'},{id:'ps10',t:'قسمت ۱۰: How to Save & Export'},{id:'ps11',t:'قسمت ۱۱: Intro to Camera Raw'},{id:'ps12',t:'قسمت ۱۲: Master Brush Tool from Start to Finish'},{id:'ps13',t:'قسمت ۱۳: Master New Hue/Saturation'}]});
  return s}
 let S;
 (function load(){let emb=null,loc=null;
@@ -874,7 +878,7 @@ function skillStats(k){const c=C(),T=T0(),j=d2j(T),[ms,me]=monthBounds(j.jy,j.jm
 function rSkl(){const c=C();let h=`<header class="ch"><h2>مهارت‌ها</h2><span class="no">۰۹</span><span class="meta">در حال یادگیری</span></header>`;
  S.skills.forEach((k,i)=>{const x=skillStats(k);const meta=[x.st.length?`${fa(x.sd)} از ${fa(x.st.length)} مرحله`:'',x.h?(x.h.kind==='hours'?`${fa(x.hrs)} ساعت این ماه`:`${fa(x.days)} روز تمرین این ماه`):''].filter(Boolean).join(' · ')||'مرحله اضافه کن';
   h+=`<details class="sk" data-i="${i}" ${openSk.has(k.id)?'open':''}><summary>${ring('sk-'+k.id,x.p,40,5,'var(--olive)',pc(x.p))}<span class="t"><b>${esc(k.name)}</b><small>${meta}</small></span><svg class="chev" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6l5 5 5-5"/></svg></summary>
-  <div class="skb"><ul class="tl">${x.st.map(s=>`<li class="tr"><button class="ti ${s.done?'done':''}" style="--c:var(--olive)" data-a="step" data-i="${i}" data-id="${s.id}"><span class="box" data-k="s:${s.id}">${CHECK}</span><span class="tx">${esc(s.t)}</span></button><button class="x" data-a="sdel" data-i="${i}" data-id="${s.id}" aria-label="حذف">×</button></li>`).join('')}</ul>
+  <div class="skb"><ul class="tl">${x.st.map(s=>`<li class="tr"><button class="ti ${s.done?'done':''}" style="--c:var(--olive)" data-a="step" data-i="${i}" data-id="${s.id}"><span class="box" data-k="s:${s.id}">${CHECK}</span><span class="tx">${s.url?`<a href="${esc(s.url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${esc(s.t)}</a>`:esc(s.t)}</span></button><button class="x" data-a="sdel" data-i="${i}" data-id="${s.id}" aria-label="حذف">×</button></li>`).join('')}</ul>
   <label class="inl"><span>+</span><input type="text" data-in="step" data-i="${i}" placeholder="مرحله‌ی بعدی…"></label>
   <div class="skf">عادت مرتبط <select data-ch="sklink" data-i="${i}"><option value="">هیچ</option>${c.habits.map(hb=>`<option value="${hb.id}" ${hb.id===k.habit?'selected':''}>${esc(hb.name)}</option>`).join('')}</select><span style="flex:1"></span><button class="lnk" data-a="skdel" data-i="${i}">حذف</button></div></div></details>`});
  h+=`<label class="inl" style="margin-top:6px"><span>+</span><input type="text" data-in="skill" placeholder="مهارت جدید…"></label>`;
