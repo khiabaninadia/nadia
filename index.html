@@ -772,6 +772,80 @@ html,body{transition:background-color .4s var(--ease),color .4s var(--ease)}
 [data-hs="flow"] .hero{cursor:default;touch-action:pan-y}
 [data-hs="flow"] .rings{background:color-mix(in srgb,var(--card) 60%,transparent);-webkit-backdrop-filter:blur(14px) saturate(1.6);backdrop-filter:blur(14px) saturate(1.6)}
 [data-hs="flow"] .hero{min-height:240px}
+
+[data-theme="accent"]{--bg:#f8f7f5;--dot:transparent;--card:#ffffff;--card2:#faf8f6;
+ --ink:#1a1a1a;--ink2:#4a4a4a;--ink3:#999999;--line:#e8e6e3;--line2:#efefec;
+ --rust:#ff6b35;--rust-lo:#e55a25;--rust-hi:#ff7d52;--rust-soft:#ffe8df;--cream:#ffffff;
+ --mustard:#ffa500;--mustard-soft:#fff3e0;--olive:#2d5016;--olive-soft:#f1f5e8;
+ --pine:#0d6e6e;--pine-soft:#e0f2f2;--plum:#6b2d5c;--plum-soft:#f5e8f0;
+ --bark:#1a1a1a;--danger:#ff6b35;
+ --h0:#f5f3f0;--h1:#efe8e3;--h2:#ddd4ca;--h3:#b8a998;--h4:#ff6b35;
+ --s0:#e55a25;--s1:#ff6b35;--s2:#ff8c5a;--s3:#ffd4bf;--s4:#ffffff;--g1:#ff6b35;--g2:#e55a25}
+[data-theme="accent"] body{background-image:none}
+[data-theme="accent"] .card,[data-theme="accent"] .settings{border:0;box-shadow:0 2px 8px rgba(255,107,53,.06)}
+[data-theme="accent"] .card.dark{background:linear-gradient(135deg,#ff6b35,#e55a25)}
+[data-theme="accent"] .pill-btn,[data-theme="accent"] .tadd .go,[data-theme="accent"] .go{background:var(--rust);border:0;color:#fff}
+[data-theme="accent"] .seg button.on{background:var(--rust);color:#fff}
+[data-theme="accent"] .rb.on{background:var(--rust);border-color:var(--rust)}
+[data-theme="accent"] .chip.on{background:var(--rust);border-color:var(--rust)}
+[data-theme="accent"] .cell.on{background:var(--rust);border-color:var(--rust)}
+[data-theme="accent"] .tm-play{background:var(--rust)}
+[data-theme="accent"] .appi stop:first-child{stop-color:var(--rust)}
+[data-theme="accent"] .appi stop:last-child{stop-color:var(--rust-lo)}
+[data-theme="accent"] :focus-visible{outline:2px solid var(--rust)}
+
+[data-theme="minimal"]{--bg:#fafafa;--dot:transparent;--card:#ffffff;--card2:#f5f5f5;
+ --ink:#0d0d0d;--ink2:#555555;--ink3:#aaaaaa;--line:#eeeeee;--line2:#f5f5f5;
+ --rust:#000000;--rust-lo:#1a1a1a;--rust-hi:#333333;--rust-soft:#f0f0f0;--cream:#ffffff;
+ --mustard:#000000;--mustard-soft:#f5f5f5;--olive:#222222;--olive-soft:#f0f0f0;
+ --pine:#333333;--pine-soft:#f5f5f5;--plum:#1a1a1a;--plum-soft:#f5f5f5;
+ --bark:#0d0d0d;--danger:#333333;
+ --h0:#f5f5f5;--h1:#e0e0e0;--h2:#cccccc;--h3:#999999;--h4:#666666;
+ --s0:#1a1a1a;--s1:#333333;--s2:#555555;--s3:#cccccc;--s4:#ffffff;--g1:#000000;--g2:#333333}
+[data-theme="minimal"] body{background-image:none}
+[data-theme="minimal"] .card{border:1px solid var(--line);box-shadow:0 1px 0 var(--line)}
+[data-theme="minimal"] .pill-btn,[data-theme="minimal"] .tadd .go{background:#000;border:0}
+[data-theme="minimal"] .seg button.on{background:#000;color:#fff}
+[data-theme="minimal"] .rb.on{background:#000;border-color:#000}
+[data-theme="minimal"] .chip.on{background:#000;border-color:#000}
+[data-theme="minimal"] .cell.on{background:#000;border-color:#000}
+
+/* homework checklist */
+.hw-sect{margin:18px 0 0;padding:14px;background:var(--card2);border-radius:18px;border:1px solid var(--line)}
+.hw-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-weight:700;font-size:.88rem;color:var(--ink);letter-spacing:.02em}
+.hw-head i{width:6px;height:6px;border-radius:50%;background:var(--rust)}
+.hw-done{margin-inline-start:auto;font-size:.74rem;color:var(--ink3);font-weight:500;white-space:nowrap}
+.hw-list{display:grid;gap:6px;margin-bottom:8px;max-height:200px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.hw-item{display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--card);border-radius:12px;border:1px solid var(--line);transition:all .2s}
+.hw-item:hover{background:color-mix(in srgb,var(--rust) 3%,var(--card));border-color:var(--rust-soft)}
+.hw-ck{width:18px;height:18px;border:1.5px solid var(--line);border-radius:6px;flex:none;display:grid;place-items:center;cursor:pointer;transition:all .2s;background:transparent}
+.hw-item.done .hw-ck{background:var(--rust);border-color:var(--rust)}
+.hw-item.done .hw-ck::after{content:"✓";color:#fff;font-size:.85rem;font-weight:700}
+.hw-item.done .hw-txt{color:var(--ink3);text-decoration:line-through;text-decoration-color:var(--ink3)}
+.hw-txt{flex:1;min-width:0;font-size:.92rem;color:var(--ink2);word-break:break-word}
+.hw-del{border:0;background:none;color:var(--ink3);width:22px;height:22px;padding:0;border-radius:50%;flex:none;display:grid;place-items:center;cursor:pointer;font-size:.9rem;opacity:0;transition:all .2s}
+.hw-item:hover .hw-del{opacity:1}
+.hw-del:hover{background:var(--rust-soft);color:var(--rust)}
+.hw-add{display:flex;gap:6px;margin-bottom:10px}
+.hw-inp{flex:1;border:1px solid var(--line);border-radius:10px;padding:7px 10px;font-size:.92rem;background:#fff;color:var(--ink);font-family:inherit}
+.hw-inp:focus{outline:none;border-color:var(--rust);box-shadow:0 0 0 3px color-mix(in srgb,var(--rust) 15%,transparent)}
+.hw-btn{border:0;border-radius:10px;background:var(--rust);color:#fff;width:32px;height:32px;padding:0;display:grid;place-items:center;font-weight:700;cursor:pointer;transition:all .2s}
+.hw-btn:hover{background:var(--rust-lo);transform:translateY(-1px)}
+.hw-send{width:100%;border:0;border-radius:12px;background:var(--rust);color:#fff;padding:10px;font-weight:700;font-size:.88rem;cursor:pointer;transition:all .2s;letter-spacing:.02em}
+.hw-send:hover{background:var(--rust-lo);transform:translateY(-1px)}
+.hw-send.sent{background:var(--olive);opacity:.8}
+[data-theme="accent"] .hw-item:hover{background:color-mix(in srgb,#ff6b35 3%,var(--card));border-color:rgba(255,107,53,.3)}
+[data-theme="accent"] .hw-ck{border-color:rgba(255,107,53,.4)}
+[data-theme="accent"] .hw-item.done .hw-ck{background:#ff6b35;border-color:#ff6b35}
+[data-theme="accent"] .hw-inp:focus{border-color:#ff6b35;box-shadow:0 0 0 3px rgba(255,107,53,.15)}
+[data-theme="accent"] .hw-btn,[data-theme="accent"] .hw-send{background:#ff6b35}
+[data-theme="accent"] .hw-btn:hover,[data-theme="accent"] .hw-send:hover{background:#e55a25}
+[data-theme="minimal"] .hw-sect{border:1px solid var(--line)}
+[data-theme="minimal"] .hw-item{border:1px solid var(--line)}
+[data-theme="minimal"] .hw-item.done .hw-ck{background:#000}
+[data-theme="minimal"] .hw-btn,[data-theme="minimal"] .hw-send{background:#000}
+[data-theme="minimal"] .hw-btn:hover,[data-theme="minimal"] .hw-send:hover{background:#222}
+
 </style>
 </head>
 <body>
@@ -855,7 +929,7 @@ function normalize(s){const d=clone(DEF);s=s&&typeof s==='object'?s:{};const had
  if(hadCfg&&!(oldCv>=2)){const gi=c.groups.findIndex(g=>g.id==='grow');const add=[{id:'learn',name:'یادگیری',icon:'🧠',c:'var(--olive)'},{id:'art',name:'هنر',icon:'🎨',c:'var(--pine)'}].filter(g=>!c.groups.some(x=>x.id===g.id));
   if(gi>=0)c.groups.splice(gi,1,...add);else c.groups.push(...add);
   c.habits.forEach(h=>{if(h.g==='grow')h.g=h.id==='art'?'art':'learn'});c.cv=2}
- s.lp=Object.assign({start:null,titles:{},log:{}},s.lp&&typeof s.lp==='object'?s.lp:{});if(!s.lp.titles)s.lp.titles={};if(!s.lp.log)s.lp.log={};if(!Array.isArray(s.tasks))s.tasks=[];if(!Array.isArray(s.library))s.library=[];if(!Array.isArray(s.skills))s.skills=d.skills;s.skills=s.skills.filter(k=>k.id!=='sk-pr'&&String(k.name).trim().toLowerCase()!=='premiere');
+ s.lp=Object.assign({start:null,titles:{};s.hw=s.hw||{},log:{}},s.lp&&typeof s.lp==='object'?s.lp:{});if(!s.lp.titles)s.lp.titles={};if(!s.lp.log)s.lp.log={};if(!Array.isArray(s.tasks))s.tasks=[];if(!Array.isArray(s.library))s.library=[];if(!Array.isArray(s.skills))s.skills=d.skills;s.skills=s.skills.filter(k=>k.id!=='sk-pr'&&String(k.name).trim().toLowerCase()!=='premiere');
  if(!s.config.groups.some(g=>g.id==='art'))s.config.groups.push({id:'art',name:'هنر',icon:'🎨',c:'var(--pine)'});
  if(!s.config.habits.some(h=>h.id==='ps'))s.config.habits.push({id:'ps',name:'یادگیری فتوشاپ',g:'art'});
  if(!s.skills.some(k=>k.id==='sk-ps'))s.skills.push({id:'sk-ps',name:'فتوشاپ',habit:'ps',steps:[{id:'ps1',t:'قسمت ۱: Photoshop for Complete Beginners',done:true,url:'https://youtu.be/xTzvQkOll2U'},{id:'ps2',t:'قسمت ۲: Master Layers'},{id:'ps3',t:'قسمت ۳: Opacity vs Fill'},{id:'ps4',t:'قسمت ۴: Layer Mask'},{id:'ps5',t:'قسمت ۵: Blending Modes'},{id:'ps6',t:'قسمت ۶: Selections'},{id:'ps7',t:'قسمت ۷: Remove Tool'},{id:'ps8',t:'قسمت ۸: Blend If Explained'},{id:'ps9',t:'قسمت ۹: Master Filters'},{id:'ps10',t:'قسمت ۱۰: How to Save & Export'},{id:'ps11',t:'قسمت ۱۱: Intro to Camera Raw'},{id:'ps12',t:'قسمت ۱۲: Master Brush Tool from Start to Finish'},{id:'ps13',t:'قسمت ۱۳: Master New Hue/Saturation'}]});
@@ -1039,13 +1113,22 @@ function rWk(){const c=C(),d=UI.day,T=T0(),ws=d-wd(d),[ms,me]=monthBounds(d2j(d)
  $('#c-wk').innerHTML=h+'</div>'}
 
 /* ---------- english ---------- */
+
+function hwHtml(){const d=UI.day,j=d2j(d),wd=j.jw||0,isHw=(wd===2||wd===4);if(!isHw)return '';
+const k=key(d),items=(S.hw[k]||[]),name=WD[wd],done=items.filter(x=>x.c).length,all=items.length;
+const showSend=all>0&&done===all&&d<=T0();
+return `<div class="hw-sect"><span class="hw-head"><i></i>تکلیف ${name}${all?` <span class="hw-done">${fa(done)}/${fa(all)}</span>`:''}</span>
+<div class="hw-add"><input type="text" class="hw-inp" data-hw="inp" placeholder="تکلیف جدید..." maxlength="80"><button class="hw-btn" data-hw="add">+</button></div>
+<div class="hw-list">${all?items.map((it,i)=>`<div class="hw-item ${it.c?'done':''}"><button class="hw-ck" data-hw="toggle" data-i="${i}"></button><span class="hw-txt">${esc(it.t)}</span><button class="hw-del" data-hw="del" data-i="${i}">×</button></div>`).join(''):'<div class="hw-item" style="color:var(--ink3);justify-content:center;cursor:default"><span class="hw-txt" style="text-decoration:none">هنوز تکلیفی اضافه نشده</span></div>'}</div>
+${showSend?`<button class="hw-send" data-hw="send">✓ تکالیف ارسال شد</button>`:''}</div>`}
+
 function rEng(){const c=C(),eng=c.habits.find(h=>h.kind==='hours'),el=$('#c-eng');
  if(!eng){el.innerHTML=`<header class="ch"><h2>زبان</h2><span class="no">۰۶</span></header><p class="empty">یه عادت «ساعتی» توی تنظیمات بساز.</p>`;return}
  const d=UI.day,T=T0(),v=+hVal(eng,d)||0,ws=d-wd(d);let tot=0,bars='',labs='';
  for(let i=0;i<7;i++){const x=ws+i,hv=+hVal(eng,x)||0,fu=x>T;tot+=hv;bars+=`<div class="b">${hv?`<span>${fa(hv)}</span>`:''}<i class="${fu?'fu':!hv?'z':hv<c.goalMin?'lo':''}" style="height:${fu?0:Math.max(hv/3*100,4)}%;animation-delay:${i*40}ms"></i></div>`;labs+=`<span class="${x===T?'td':''}">${WDs[i]}</span>`}
  const st=streak(eng,Math.min(d,T));
  el.innerHTML=`<header class="ch"><h2>${esc(eng.name)}</h2><span class="no">۰۶</span>${ring('eng',Math.min(v/c.goalMin,1),34,5,'var(--mustard)')}<span class="meta">این هفته ${fa(tot)} از ${fa(c.goalMin*7)} ساعت</span></header>${tmHTML()}
- <div class="engw"><div class="ew-l"><span class="sub">${d===T?'امروز':'این روز'} چند ساعت خوندی؟</span><div class="hrs3" role="radiogroup" aria-label="ساعت مطالعه">${[1,1.5,2,2.5,3].map(n=>`<button role="radio" aria-checked="${v===n}" class="${v===n?'on':''}" data-a="hrs" data-n="${n}"><b>${fa(n)}</b><small>ساعت</small></button>`).join('')}</div><span class="sub">هدف ${fa(c.goalMin)} تا ${fa(c.goalMax)} ساعت${st>1?` · 🔥 ${fa(st)} روز پشت سر هم`:''}</span></div>
+ <div class="engw"><div class="ew-l"><span class="sub">${d===T?'امروز':'این روز'} چند ساعت خوندی؟</span><div class="hrs3" role="radiogroup" aria-label="ساعت مطالعه">${[1,1.5,2,2.5,3].map(n=>${hwHtml()}`<button role="radio" aria-checked="${v===n}" class="${v===n?'on':''}" data-a="hrs" data-n="${n}"><b>${fa(n)}</b><small>ساعت</small></button>`).join('')}</div><span class="sub">هدف ${fa(c.goalMin)} تا ${fa(c.goalMax)} ساعت${st>1?` · 🔥 ${fa(st)} روز پشت سر هم`:''}</span></div>
  <div><div class="wbars">${bars}<div class="goal" style="bottom:${c.goalMin/3*100}%"></div></div><div class="wlab">${labs}</div></div></div>`}
 
 /* ---------- month ---------- */
@@ -1072,6 +1155,7 @@ function tmTick(){const ms=tmMs(),t=document.getElementById('tmT');if(t)t.textCo
  let isl=document.getElementById('tmIsl');if(TM.run){if(!isl){isl=document.createElement('button');isl.id='tmIsl';isl.className='tm-isl';isl.setAttribute('data-tm','jump');document.body.appendChild(isl)}isl.innerHTML=`<i></i><span>زبان</span><b>${tmFmt(ms)}</b>`}else if(isl)isl.remove();
  document.title=TM.run?`${tmFmt(ms)} · زبان`:'NADIA'}
 setInterval(tmTick,1000);
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.dataset.hw==='inp'){e.preventDefault();e.target.nextElementSibling.click()}});
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-tm]');if(!b)return;const a=b.dataset.tm;
  if(a==='toggle'){if(TM.run){TM.acc=(TM.acc||0)+Date.now()-TM.t;TM.run=false}else{TM.run=true;TM.t=Date.now()}tmSave();rEng();tmTick();return}
  if(a==='reset'){if(!confirm('این جلسه ثبت نشه و پاک بشه؟'))return;TM={};tmSave();rEng();tmTick();return}
