@@ -3,230 +3,678 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#843e55">
+<meta name="theme-color" content="#761d36">
 <title>پلنر شخصی نادیا</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 <style>
 :root{
-  --bg:#f5efe9;--paper:#fffdf9;--ink:#392d32;--muted:#87767b;
-  --accent:#843e55;--soft:#f1e0e6;--line:#e6d8d3;--green:#52725b
+  --bg:#f4e8e3;
+  --paper:#fffaf3;
+  --ink:#482d34;
+  --muted:#92757c;
+  --wine:#761d36;
+  --rose:#d6a0a8;
+  --pink:#eed3d2;
+  --soft:#f6e7e5;
+  --line:#d8bdbb;
+  --green:#56715e;
+  --shadow:0 6px 18px #6430440a;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.9 Tahoma,Arial,sans-serif}
-main{max-width:1150px;margin:auto;padding:24px 18px 65px}
+html{scroll-behavior:smooth;scroll-padding-top:85px}
+body{
+  margin:0;color:var(--ink);
+  font:14px/1.95 Vazirmatn,Tahoma,sans-serif;
+  background-color:var(--bg);
+  background-image:
+    linear-gradient(#ad737312 1px,transparent 1px),
+    linear-gradient(90deg,#ad737312 1px,transparent 1px);
+  background-size:23px 23px;
+}
 button,input,textarea,select{font:inherit}
-button{cursor:pointer;min-height:40px;border:0}
-input,textarea,select{color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px;min-width:0}
-button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #bc8c43;outline-offset:3px}
+button,a,input,textarea,select{-webkit-tap-highlight-color:transparent}
+button{cursor:pointer;min-height:42px}
+button,input,textarea,select{color:var(--ink)}
+button{border:0}
+button:disabled{opacity:.42;cursor:not-allowed}
+button:not(:disabled),a{touch-action:manipulation}
+button:focus-visible,a:focus-visible,input:focus-visible,
+textarea:focus-visible,select:focus-visible,summary:focus-visible{
+  outline:3px solid #b57b35;outline-offset:4px;
+}
+input,textarea,select{
+  border:1px solid var(--line);background:#fffdf8;
+  border-radius:9px;padding:9px 11px;min-width:0;
+}
+input[type=text]{width:100%}
+input[type=checkbox]{
+  width:20px;height:20px;min-width:20px;margin:0;
+  accent-color:var(--wine);cursor:pointer;padding:0;
+}
+input[type=number]{width:94px}
+input[type=date]{max-width:100%}
+textarea{
+  width:100%;min-height:220px;resize:vertical;
+  line-height:32px;padding-top:7px;
+  background:
+    repeating-linear-gradient(transparent 0 31px,#bf969b45 31px 32px);
+  border:0;border-radius:0;
+}
 h1,h2,h3,p{margin:0}
-h1{font-size:27px}
-h2{font-size:18px}
-h3{font-size:14px}
+h2{font-size:17px}
+h3{font-size:14px;font-weight:800}
 small,.muted{color:var(--muted)}
-header,.card{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:22px}
-header{margin-bottom:18px}
-.brand{letter-spacing:5px;color:var(--accent);font-weight:bold;font-size:21px}
-.row{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+a{color:var(--wine)}
+main{max-width:1240px;margin:auto;padding:25px 22px 110px}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .between{justify-content:space-between}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.card{min-width:0}
-.wide{grid-column:1/-1}
-.card h2{margin-bottom:16px}
-.btn{padding:8px 14px;background:var(--soft);color:var(--accent);border-radius:12px}
-.primary{background:var(--accent);color:white}
-.danger{color:#a2233a;background:#fbe8eb}
-.icon{background:transparent;color:var(--muted);padding:4px 10px;font-size:20px}
-.form{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
-.form input[type=text]{flex:1;min-width:130px}
-.list{list-style:none;padding:0;margin:0}
-.item{display:flex;gap:9px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
-.item:last-child{border-bottom:0}
-.item label{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
-.item span{overflow-wrap:anywhere}
-input[type=checkbox]{width:21px;height:21px;accent-color:var(--accent);flex:none}
-.done{text-decoration:line-through;color:var(--muted)}
-.empty{color:var(--muted);padding:15px 0;font-size:13px}
-.pills{display:flex;gap:9px;flex-wrap:wrap}
-.pill{border:1px solid var(--line);border-radius:15px;padding:9px 13px;background:var(--bg);color:var(--ink)}
-.pill.on{background:var(--green);border-color:var(--green);color:white}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}
-.stat{background:var(--bg);padding:12px;border-radius:15px;text-align:center}
-.stat b{display:block;font-size:23px;color:var(--accent)}
+.grow{flex:1;min-width:0}
+.stack{display:grid;gap:12px}
+.btn{
+  padding:8px 15px;border-radius:9px;background:var(--soft);
+  color:var(--wine);border:1px solid #bb8b9445;
+  transition:transform .16s,background .16s;
+}
+.btn:not(:disabled):hover{background:var(--pink);transform:translateY(-1px)}
+.primary{background:var(--wine);color:var(--paper);border-color:var(--wine)}
+.primary:not(:disabled):hover{background:#591128}
+.danger{background:#f9e5e5;color:#9c2639}
+.icon{background:transparent;color:var(--muted);padding:4px 12px;font-size:21px}
+.hint{font-size:12px;color:var(--muted);margin-top:12px}
+.empty{
+  font-size:13px;color:var(--muted);padding:20px 8px;
+  text-align:center;border:1px dashed var(--line);border-radius:10px;
+}
+.form{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:14px 0}
+.form input[type=text]{flex:1;min-width:140px}
+.form label{font-size:12px;color:var(--muted)}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.ribbon{
+  display:inline-block;background:var(--wine);color:#fff7ef;
+  padding:5px 17px 6px 22px;position:relative;
+  clip-path:polygon(1% 4%,100% 0,98% 27%,100% 46%,98% 73%,100% 96%,0 100%,2% 65%,0 34%);
+  transform:rotate(-.6deg);
+}
+.section-no{font-size:12px;color:var(--muted);white-space:nowrap}
+.decor{color:var(--wine);font-size:25px;line-height:1}
+
+/* جلد */
+.hero{
+  position:relative;margin:0 0 23px;padding:28px;
+  border:1px solid var(--line);border-radius:8px 20px 9px 16px;
+  background:var(--paper);box-shadow:var(--shadow);
+  isolation:isolate;
+}
+.hero:before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  border-radius:inherit;
+  background-image:radial-gradient(#71435117 .65px,transparent .65px);
+  background-size:6px 6px;
+}
+.hero-top{display:grid;grid-template-columns:1fr 1.5fr 1fr;gap:22px;align-items:center}
+.cover-title{text-align:center;direction:ltr}
+.cover-title .eyebrow{font-size:11px;letter-spacing:4px;color:var(--muted)}
+.cover-title .daily{
+  display:block;font-size:clamp(48px,7vw,86px);
+  line-height:1.18;font-weight:900;letter-spacing:2px;color:var(--wine);
+  -webkit-text-stroke:1px #fff7ef;
+  text-shadow:3px 3px 0 var(--pink),-3px -2px 0 var(--pink);
+}
+.cover-title .planner{
+  font-size:clamp(21px,3vw,36px);font-weight:500;
+  letter-spacing:9px;color:var(--wine);margin-top:-3px;
+}
+.cover-title .tagline{
+  display:inline-block;margin-top:12px;background:var(--pink);
+  padding:2px 19px;letter-spacing:1px;font-size:11px;transform:rotate(-1deg);
+}
+.paper-note{
+  position:relative;padding:23px 15px 16px;
+  background:#f6e7df;border:1px solid #cba7a7;box-shadow:3px 4px 0 #bc929018;
+  text-align:center;transform:rotate(3deg);
+}
+.paper-note:before,.taped:before{
+  content:"";position:absolute;width:72px;height:21px;
+  top:-10px;left:calc(50% - 36px);transform:rotate(-5deg);
+  background-color:#b8798599;
+  background-image:radial-gradient(#fff6 1px,transparent 1px);
+  background-size:5px 5px;pointer-events:none;
+}
+.paper-note p{font-size:14px;font-weight:700}
+.paper-note small{display:block;margin-top:7px;font-size:11px}
+.date-note{
+  transform:rotate(-2deg);background:#eed0cf;
+  padding:18px;text-align:center;position:relative;
+  clip-path:polygon(2% 0,100% 3%,98% 95%,1% 100%,3% 80%,0 60%,3% 25%);
+}
+.date-note .day-number{font-size:47px;color:var(--wine);font-weight:900;line-height:1.25}
+.date-note h1{font-size:15px;margin-top:6px}
+.date-note small{font-size:11px}
+.cherries{width:61px;height:68px;display:block;margin:8px auto 0}
+.hero-bottom{border-top:1px dashed var(--line);margin-top:26px;padding-top:18px}
+.greeting{font-size:13px;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:19px}
+.stat{background:#f7eeea;border:1px solid #e1c8c2;border-radius:8px;padding:12px;text-align:center}
+.stat b{font-size:25px;color:var(--wine);display:block;line-height:1.5}
 .stat small{font-size:11px}
-textarea{width:100%;min-height:190px;resize:vertical;line-height:2}
-.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-top:14px}
-.weekday{text-align:center;color:var(--muted);font-size:11px}
-.date{border-radius:12px;background:var(--bg);color:var(--ink);min-height:43px;position:relative}
-.date.recorded{background:var(--soft)}
-.date.selected{outline:2px solid var(--accent)}
-.date.today:after{content:"";width:4px;height:4px;border-radius:50%;background:currentColor;position:absolute;bottom:4px;left:50%}
-.bar{height:8px;background:var(--bg);border-radius:10px;overflow:hidden;margin:12px 0}
-.bar i{display:block;background:var(--accent);height:100%}
-.lesson-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.library-item{border-bottom:1px solid var(--line);padding:12px 0}
-.library-item select{font-size:12px;padding:5px}
-#message{color:var(--accent);font-size:12px;margin:12px 0}
-#message:empty{display:none}
-.hint{font-size:12px;color:var(--muted);margin:10px 0}
-footer{text-align:center;color:var(--muted);font-size:12px;margin-top:25px}
-details summary{cursor:pointer;font-weight:bold}
-button:disabled{opacity:.45;cursor:default}
-@media(max-width:700px){
- main{padding:14px 10px 45px}
- .grid,.lesson-grid{grid-template-columns:1fr}
- .wide{grid-column:auto}
- header,.card{padding:18px 14px}
- h1{font-size:22px}
- input,textarea,select{font-size:16px}
+.overall{display:flex;gap:12px;align-items:center;margin-top:16px}
+.overall label{font-size:12px;white-space:nowrap}
+.bar{height:9px;background:#e9d7d3;border-radius:30px;overflow:hidden;flex:1}
+.bar i{display:block;height:100%;width:0;background:var(--wine);border-radius:30px;transition:width .4s ease}
+#progressText{font-size:12px;min-width:35px;color:var(--wine)}
+#message{
+  margin-top:12px;font-size:11px;color:var(--muted);
+  padding:7px 10px;border-right:2px solid var(--rose);
+}
+#message.error{color:#9c2639;background:#fbe7e7;border-color:#9c2639}
+
+/* دفتر */
+.nav{
+  position:sticky;top:10px;z-index:10;display:flex;gap:6px;
+  padding:8px;margin-bottom:27px;overflow:auto;
+  background:#fffaf3ef;backdrop-filter:blur(10px);
+  border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);
+}
+.nav a{
+  flex:1;white-space:nowrap;text-align:center;text-decoration:none;
+  padding:7px 14px;border-radius:7px;font-size:12px;
+}
+.nav a:hover{background:var(--soft)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.card{
+  position:relative;min-width:0;padding:22px;
+  background:var(--paper);border:1px solid #bd959b;
+  border-radius:12px 8px 16px 7px;box-shadow:var(--shadow);
+}
+.card:nth-child(3n){border-radius:8px 16px 7px 13px}
+.wide{grid-column:1/-1}
+.pink-paper{background:#f1d8d5}
+.ruled{
+  background-color:var(--paper);
+  background-image:repeating-linear-gradient(transparent 0 33px,#d2b5b01c 33px 34px);
+}
+.list{list-style:none;margin:0;padding:0}
+.item{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px dashed var(--line)}
+.item:last-child{border-bottom:0}
+.item label{display:flex;align-items:center;gap:11px;flex:1;min-width:0}
+.item span,.item b{overflow-wrap:anywhere}
+.done{text-decoration:line-through;color:var(--muted)}
+.pills{display:flex;gap:9px;flex-wrap:wrap}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;min-height:43px;
+  padding:8px 12px;border:1px solid var(--line);
+  border-radius:9px;background:#fffaf380;color:var(--ink);
+  transition:background .2s,box-shadow .2s;
+}
+.pill:before{content:"";width:14px;height:14px;border:1px solid #ac7b88;border-radius:50%;flex:none}
+.pill.on{background:var(--wine);color:#fff8ef;border-color:var(--wine)}
+.pill.on:before{content:"✓";color:var(--wine);background:#fff8ef;border-color:#fff8ef;font-size:11px;line-height:13px;text-align:center}
+.quick{display:flex;flex-wrap:wrap;gap:7px;margin-top:13px}
+.quick button{min-height:35px;font-size:12px;padding:4px 13px}
+.week-table{overflow:auto;margin:14px -4px 0;padding:0 4px 5px}
+table{width:100%;border-collapse:collapse}
+th,td{padding:8px 6px;text-align:center;border-bottom:1px dashed #dfc8c3}
+th{font-size:11px;font-weight:500;color:var(--muted)}
+.habit-table{min-width:530px}
+.habit-table th:first-child,.habit-table td:first-child{
+  text-align:right;min-width:145px;max-width:230px;
+}
+.habit-table td:first-child{font-size:12px}
+.habit-table th small{display:block}
+.habit-table .active-col{background:#efd5d34d}
+.tick{
+  min-height:30px;width:30px;padding:0;background:transparent;
+  border:1px solid #bc939c;border-radius:50%;color:var(--wine);
+  font-size:14px;line-height:28px;
+}
+.tick.on{background:var(--wine);color:var(--paper);border-color:var(--wine)}
+.badge{
+  display:inline-block;font-size:10px;background:var(--soft);
+  padding:1px 7px;border-radius:5px;color:var(--wine);white-space:nowrap;
+}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:25px}
+.subcard{padding:16px;border:1px dashed #c8a7a5;border-radius:9px}
+.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-top:17px}
+.weekday{text-align:center;font-size:11px;color:var(--muted)}
+.date{
+  min-height:45px;position:relative;background:transparent;
+  border:1px solid transparent;border-radius:9px;
+}
+.date.recorded{background:#e9c3c2;color:var(--wine)}
+.date.selected{border:2px solid var(--wine);font-weight:800}
+.date.today:after{
+  content:"";position:absolute;width:4px;height:4px;border-radius:50%;
+  bottom:4px;left:calc(50% - 2px);background:var(--wine);
+}
+.mini-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:17px}
+.mini-stats div{padding:10px;background:#f2e5df;border-radius:8px;font-size:11px;color:var(--muted)}
+.mini-stats b{display:block;font-size:19px;color:var(--wine)}
+.review-help{padding:12px;background:var(--soft);border-radius:9px;font-size:12px;margin-top:15px}
+.lesson-step small{display:block;font-size:10px}
+.lesson-step input:checked+span{color:var(--muted);text-decoration:line-through}
+details summary{cursor:pointer;font-size:14px;font-weight:700}
+details[open]>summary{margin-bottom:16px}
+.lesson-table{min-width:430px;font-size:12px}
+.lesson-table .current{background:var(--soft);color:var(--wine)}
+.skill,.library-item{
+  padding:15px;border:1px solid var(--line);border-radius:10px;margin-top:12px;background:#fffaf370;
+}
+.skill .bar{height:5px;margin:12px 0}
+.skill .form{margin-bottom:0}
+.skill .item{font-size:12px;padding:7px 0}
+.library-item select,.library-item input{font-size:12px;padding:5px 8px}
+.library-item .meta{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
+.library-item .meta input{flex:1;min-width:130px}
+.library-item b{overflow-wrap:anywhere}
+.alerts{display:grid;gap:7px;margin-top:13px}
+.alerts a,.alerts p{
+  text-decoration:none;font-size:12px;padding:9px 12px;
+  background:#f3e2de;border-radius:7px;
+}
+.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:23px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:32px 10px 0}
+footer strong{display:block;color:var(--wine);letter-spacing:2px;margin-top:7px}
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+@media(min-width:1050px){
+  #daily{grid-column:1/-1}
+  #daily .habit-table th:first-child,#daily .habit-table td:first-child{width:32%}
+}
+@media(max-width:760px){
+  main{padding:15px 12px 75px}
+  .hero{padding:20px 15px}
+  .hero-top{grid-template-columns:1fr 1.3fr;gap:16px}
+  .paper-note{display:none}
+  .cover-title{grid-column:2;grid-row:1}
+  .date-note{grid-column:1;grid-row:1;padding:16px 8px}
+  .cover-title .daily{font-size:49px}
+  .cover-title .planner{font-size:22px;letter-spacing:5px}
+  .cover-title .eyebrow{font-size:8px;letter-spacing:2px}
+  .cover-title .tagline{font-size:9px;padding:3px 8px;letter-spacing:0}
+  .date-note .day-number{font-size:36px}
+  .date-note h1{font-size:12px}
+  .hero-bottom>.row{gap:14px}
+  .hero-bottom .btn{font-size:12px;padding:7px 11px}
+  .grid,.split,.settings-grid{grid-template-columns:1fr}
+  .wide{grid-column:auto}
+  .grid{gap:23px}
+  .card{padding:19px 15px}
+  .stats{gap:7px}
+  .stat{padding:10px 5px}
+  .stat b{font-size:22px}
+  .stat small{font-size:10px}
+  .nav{top:5px;margin-bottom:23px}
+  .nav a{font-size:11px;padding:7px 12px}
+  input,textarea,select{font-size:16px}
+  .library-item select,.library-item input{font-size:16px}
+  .cherries{width:43px;height:46px}
+  h2{font-size:15px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*:before,*:after{transition:none!important;animation:none!important}
+}
+@media print{
+  body{background:white}
+  main{padding:0}
+  .nav,.form,.settings,.icon,.quick,#message{display:none!important}
+  .hero,.card{box-shadow:none;break-inside:avoid}
+  .grid{display:block}
+  .card{margin-top:16px}
+  button{color:var(--ink)}
 }
 </style>
 </head>
+
 <body>
 <main>
-<header>
-  <div class="row between">
-    <div>
-      <div class="brand" dir="ltr">NADIA</div>
-      <h1 id="dateTitle"></h1>
+<header class="hero">
+  <div class="hero-top">
+    <div class="paper-note">
+      <span class="decor" aria-hidden="true">♡</span>
+      <p>قدم‌های کوچکِ هر روز<br>نتیجه‌های بزرگ می‌سازند.</p>
+      <small>قرار نیست همه‌چیز بی‌نقص باشد.</small>
+      <svg class="cherries" viewBox="0 0 80 85" aria-hidden="true">
+        <path d="M24 56 Q40 35 49 8 M58 58 Q63 32 49 8"
+          fill="none" stroke="#55212b" stroke-width="3" stroke-linecap="round"/>
+        <path d="M48 12 Q66 0 70 10 Q63 20 48 12"
+          fill="#a96a76" stroke="#55212b" stroke-width="2"/>
+        <circle cx="23" cy="61" r="16" fill="#861f3a" stroke="#55212b" stroke-width="2"/>
+        <circle cx="58" cy="65" r="16" fill="#861f3a" stroke="#55212b" stroke-width="2"/>
+        <path d="M16 53 Q12 57 14 61 M51 57 Q47 61 49 65"
+          fill="none" stroke="#f1c2c4" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <div class="cover-title">
+      <div class="eyebrow">NADIA’S LITTLE WORLD</div>
+      <span class="daily">DAILY</span>
+      <div class="planner">planner ♡</div>
+      <div class="tagline">plan it. do it. make it yours.</div>
+    </div>
+
+    <div class="date-note">
       <small id="weekday"></small>
-    </div>
-    <div class="row">
-      <button class="btn" id="previousDay" aria-label="روز قبل">← روز قبل</button>
-      <button class="btn primary" id="today">امروز</button>
-      <button class="btn" id="nextDay" aria-label="روز بعد">روز بعد →</button>
+      <div class="day-number" id="dayNumber"></div>
+      <h1 id="dateTitle"></h1>
+      <small>یک صفحهٔ تازه برای تو</small>
     </div>
   </div>
-  <div class="stats">
-    <div class="stat"><b id="habitScore"></b><small>عادت‌های انجام‌شده</small></div>
-    <div class="stat"><b id="taskScore"></b><small>کارهای انجام‌شده</small></div>
-    <div class="stat"><b id="weeklyHours"></b><small>ساعت زبان این هفته</small></div>
+
+  <div class="hero-bottom">
+    <div class="row between">
+      <p class="greeting" id="greeting"></p>
+      <div class="row">
+        <button class="btn" id="previousDay">روز قبل</button>
+        <button class="btn primary" id="today">امروز</button>
+        <button class="btn" id="nextDay">روز بعد</button>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b id="habitScore">۰٪</b><small>تیک‌های روزانه</small></div>
+      <div class="stat"><b id="taskScore">۰ / ۰</b><small>کارهای انجام‌شده</small></div>
+      <div class="stat"><b id="weeklyHours">۰</b><small>ساعت زبان این هفته</small></div>
+    </div>
+
+    <div class="overall">
+      <label>پیشرفت این روز</label>
+      <div class="bar" role="progressbar" id="overallBar"
+        aria-label="پیشرفت تیک‌ها و کارهای روز" aria-valuemin="0" aria-valuemax="100">
+        <i id="overallFill"></i>
+      </div>
+      <b id="progressText">۰٪</b>
+    </div>
+    <div id="message" role="status" aria-live="polite"></div>
   </div>
-  <div id="message" role="status" aria-live="polite"></div>
 </header>
 
-<div class="grid">
-<section class="card">
-  <h2>۰۱ · کارهای روز</h2>
-  <form id="taskForm" class="form">
-    <input id="taskInput" type="text" maxlength="250" placeholder="یک قدم کوچک برای امروز…" aria-label="عنوان کار" required>
-    <button class="btn primary">افزودن</button>
-  </form>
-  <ul id="tasks" class="list"></ul>
-</section>
+<nav class="nav" aria-label="بخش‌های پلنر">
+  <a href="#daily">تیک‌های روزانه</a>
+  <a href="#tasksCard">کارها</a>
+  <a href="#language">زبان</a>
+  <a href="#calendarCard">تقویم</a>
+  <a href="#skillsCard">مهارت‌ها</a>
+  <a href="#settings">تنظیمات</a>
+</nav>
 
-<section class="card">
-  <h2>۰۲ · ریتم روزانه</h2>
-  <div id="habits" class="pills"></div>
+<div class="grid">
+
+<section class="card" id="daily">
+  <div class="section-head">
+    <h2 class="ribbon">تیک‌های روزانه ♡</h2>
+    <span class="section-no">۰۱ / ریتم کوچک زندگی</span>
+  </div>
+  <div class="row between">
+    <p class="hint" style="margin:0">تیک‌های هر روز را در ستون همان روز ثبت کن.</p>
+    <span id="weekRange" class="badge"></span>
+  </div>
+  <div class="week-table">
+    <table class="habit-table" id="habitTable" aria-label="جدول هفتگی عادت‌ها"></table>
+  </div>
   <form id="habitForm" class="form">
-    <input id="habitInput" type="text" maxlength="80" placeholder="عادت جدید…" aria-label="نام عادت" required>
+    <input id="habitInput" type="text" maxlength="80" placeholder="یک عادت یا یادآوری تازه…" aria-label="نام عادت" required>
     <button class="btn">افزودن</button>
   </form>
-  <p class="hint">عادت‌ها را متناسب با زندگی خودت انتخاب کن.</p>
+  <p class="hint">
+    موارد دارویی فقط برای ثبت برنامهٔ تجویزشدهٔ خودت هستند؛ تیک‌ها توصیهٔ مصرف یا تعیین دوز نیستند.
+  </p>
 </section>
 
-<section class="card">
-  <h2>۰۳ · انگلیسی، هر روز</h2>
-  <div class="row">
-    <label for="hours">زمان تمرین:</label>
-    <input id="hours" type="number" min="0" max="24" step="0.25" style="width:100px">
-    <span class="muted">ساعت از هدف ۳ ساعت</span>
+<section class="card ruled" id="tasksCard">
+  <div class="section-head">
+    <h2 class="ribbon">کارهای این روز</h2>
+    <span class="decor" aria-hidden="true">✧</span>
   </div>
-  <div class="bar"><i id="hoursBar"></i></div>
-  <h3>قرارهای هفته</h3>
-  <div id="weekly" class="pills" style="margin-top:12px"></div>
-  <p class="hint" id="weeklySummary"></p>
-</section>
-
-<section class="card">
-  <h2>۰۴ · مراقبت از خودم</h2>
-  <div id="food" class="pills"></div>
-  <p class="hint">یادآوری‌های عمومی برای مراقبت روزانه؛ نه برنامه درمانی یا رژیم تجویزی.</p>
-</section>
-
-<section class="card wide">
-  <div class="row between">
-    <h2>۰۵ · پادکست و مرور فاصله‌دار</h2>
-    <small>مرور در فاصله‌های ۱، ۳، ۷ و ۱۴ روز</small>
-  </div>
-  <form id="lessonForm" class="form">
-    <label for="lessonStart">شروع برنامه، میلادی:</label>
-    <input id="lessonStart" type="date" min="1900-01-01" max="2199-12-31" required>
-    <label for="lessonFirst">درس اول:</label>
-    <input id="lessonFirst" type="number" min="1" max="9999" style="width:90px" required>
-    <button class="btn">ثبت برنامه</button>
+  <form id="taskForm" class="form">
+    <input id="taskInput" type="text" maxlength="250" placeholder="یک قدم کوچک برای این روز…" aria-label="عنوان کار" required>
+    <button class="btn primary">＋ افزودن</button>
   </form>
-  <p class="hint">روزی یک درس؛ زمان مرور از تاریخ برنامه‌ریزی‌شده محاسبه می‌شود، نه تاریخ تکمیل واقعی.</p>
-  <div class="lesson-grid">
-    <div><h3 id="lessonTitle"></h3><ul id="lessonSteps" class="list"></ul></div>
-    <div><h3>مرورهای این روز</h3><div id="reviews" class="pills" style="margin-top:12px"></div></div>
+  <ul id="tasks" class="list"></ul>
+  <div class="row between" style="margin-top:15px">
+    <small id="weekTaskSummary"></small>
+    <button class="btn" id="clearDone">حذف انجام‌شده‌های این روز</button>
   </div>
+  <details style="margin-top:18px">
+    <summary id="overdueTitle">کارهای بازِ روزهای قبل</summary>
+    <div id="overdue" class="alerts"></div>
+  </details>
 </section>
 
-<section class="card">
-  <h2>۰۶ · چند خط برای خودم</h2>
-  <textarea id="notes" maxlength="12000" aria-label="یادداشت روز" placeholder="امروز چه گذشت؟"></textarea>
-  <p class="hint">ذخیره خودکار در مرورگر همین دستگاه.</p>
-</section>
-
-<section class="card">
+<section class="card" id="language">
+  <div class="section-head">
+    <h2 class="ribbon">انگلیسی، هر روز</h2>
+    <span class="decor" aria-hidden="true">♡</span>
+  </div>
   <div class="row between">
-    <h2>۰۷ · تقویم شمسی</h2>
+    <h3>زمان تمرین این روز</h3>
+    <span class="badge">هدف روزانه: ۲ تا ۳ ساعت</span>
+  </div>
+  <div class="form">
+    <label for="hours">ساعت مطالعه</label>
+    <input id="hours" type="number" min="0" max="24" step="0.25">
+    <small id="dailyHoursText"></small>
+  </div>
+  <div class="bar" aria-hidden="true"><i id="hoursBar"></i></div>
+  <div class="quick" id="hoursQuick"></div>
+  <p class="hint" id="languageWeek"></p>
+
+  <div class="subcard" style="margin-top:20px">
+    <h3>قرارهای هفته</h3>
+    <div id="weekly" class="pills" style="margin-top:12px"></div>
+    <p class="hint" id="weeklySummary"></p>
+    <p class="hint">باشگاه: ۳ روز در هفته · کلاس زبان: دوشنبه و چهارشنبه؛ جبرانی را در روز حضور ثبت کن.</p>
+  </div>
+  <div class="alerts" id="languageAlerts"></div>
+</section>
+
+<section class="card pink-paper" id="foodCard">
+  <div class="section-head">
+    <h2 class="ribbon">غذا</h2>
+    <span class="decor" aria-hidden="true">♡</span>
+  </div>
+  <p style="font-size:13px;margin-bottom:16px">وعده‌اش مهم نیست؛ هر کدام را خوردی تیک بزن.</p>
+  <div id="food" class="pills"></div>
+  <p class="hint">
+    این فهرست برای ثبت انتخاب‌های خودت است، نه رژیم تجویزی. گزینه‌ها از تنظیمات قابل تغییرند.
+  </p>
+</section>
+
+<section class="card taped" id="notesCard">
+  <div class="section-head">
+    <h2 class="ribbon">چند خط برای خودم</h2>
+    <span class="decor" aria-hidden="true">✎</span>
+  </div>
+  <textarea id="notes" maxlength="12000" aria-label="یادداشت روز"
+    placeholder="امروز چه گذشت؟&#10;چی خوب بود، چی نه…"></textarea>
+  <p class="hint">یادداشت با هر تغییر در همین مرورگر ذخیره می‌شود.</p>
+</section>
+
+<section class="card" id="calendarCard">
+  <div class="section-head">
+    <h2 class="ribbon">تقویم شمسی</h2>
+    <span class="decor" aria-hidden="true">✧</span>
+  </div>
+  <div class="row between">
+    <h3 id="monthTitle"></h3>
     <div class="row">
-      <button class="btn" id="previousMonth" aria-label="ماه قبل">←</button>
-      <button class="btn" id="nextMonth" aria-label="ماه بعد">→</button>
+      <button class="btn" id="previousMonth" aria-label="ماه قبل">ماه قبل</button>
+      <button class="btn" id="nextMonth" aria-label="ماه بعد">ماه بعد</button>
     </div>
   </div>
-  <h3 id="monthTitle"></h3>
   <div id="calendar" class="calendar"></div>
-  <p class="hint">روز رنگی: دارای ثبت · نقطه: امروز · حاشیه: روز انتخاب‌شده</p>
+  <p class="hint">صورتی: دارای ثبت · نقطه: امروز · حاشیه: روز انتخاب‌شده</p>
+  <div id="monthStats" class="mini-stats"></div>
+  <p class="hint">میانگین تیک‌ها فقط برای روزهای دارای ثبت، با فهرست فعلی عادت‌ها محاسبه می‌شود.</p>
 </section>
 
-<section class="card">
-  <h2>۰۸ · کتاب‌ها</h2>
-  <form class="form" id="bookForm">
-    <input id="bookInput" type="text" maxlength="200" placeholder="نام کتاب…" aria-label="نام کتاب" required>
+<section class="card" id="reportCard">
+  <div class="section-head">
+    <h2 class="ribbon">بررسی زبان</h2>
+    <span class="section-no">ماه انتخاب‌شده</span>
+  </div>
+  <div id="languageStats" class="mini-stats"></div>
+  <p class="hint" id="languageReport"></p>
+</section>
+
+<section class="card wide" id="lessonCard">
+  <div class="section-head">
+    <h2 class="ribbon">برنامهٔ تمرین زبان</h2>
+    <span class="section-no">گوش بده · بفهم · تعریف کن</span>
+  </div>
+
+  <details>
+    <summary>تنظیم شروع برنامه و شمارهٔ درس</summary>
+    <form id="lessonForm" class="form">
+      <label for="lessonStart">شروع، میلادی</label>
+      <input id="lessonStart" type="date" min="1900-01-01" max="2199-12-31" required>
+      <label for="lessonFirst">درس اول</label>
+      <input id="lessonFirst" type="number" min="1" max="9999" required>
+      <button class="btn primary">ثبت برنامه</button>
+    </form>
+    <div class="row">
+      <button class="btn" id="postponeLesson">برنامه یک روز عقب برود</button>
+      <button class="btn danger" id="restartLesson">شروع دوباره از امروز</button>
+    </div>
+    <p class="hint">
+      مرورها از تاریخ برنامه‌ریزی‌شده حساب می‌شوند. جابه‌جایی شروع، تاریخ درس‌ها را تغییر می‌دهد؛ تیک‌های هر شمارهٔ درس باقی می‌مانند.
+    </p>
+  </details>
+
+  <div class="split" style="margin-top:23px">
+    <div>
+      <div class="row between">
+        <h3 id="lessonTitle"></h3>
+        <span id="lessonScore" class="badge"></span>
+      </div>
+      <ul id="lessonSteps" class="list" style="margin-top:10px"></ul>
+    </div>
+    <div>
+      <h3>مرورهای این روز</h3>
+      <div id="reviews" class="pills" style="margin-top:15px"></div>
+      <p class="review-help">
+        خلاصهٔ نموداری همان درس را نگاه کن و بلند تعریفش کن.
+        اگر جایی گیر کردی، دوباره فایل صوتی را گوش بده.
+      </p>
+      <div class="subcard" style="margin-top:17px">
+        <h3>زنجیرهٔ خلاصه‌نویسی برای متن‌ها</h3>
+        <p class="hint">
+          شنیدن برای درک کلی ← خواندن و هایلایت ← خلاصهٔ هر پاراگراف ← خلاصهٔ نموداری ← خلاصه‌گویی
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <details style="margin-top:25px">
+    <summary>نمای برنامه؛ ۱۴ روز از روز انتخاب‌شده</summary>
+    <div class="week-table">
+      <table class="lesson-table" id="lessonSchedule"></table>
+    </div>
+  </details>
+</section>
+
+<section class="card wide" id="skillsCard">
+  <div class="section-head">
+    <h2 class="ribbon">مهارت‌ها</h2>
+    <span class="decor" aria-hidden="true">✧</span>
+  </div>
+  <form id="skillForm" class="form">
+    <input id="skillInput" type="text" maxlength="100" placeholder="چه چیزی یاد می‌گیری؟" aria-label="نام مهارت" required>
+    <button class="btn primary">＋ مهارت جدید</button>
+  </form>
+  <div id="skills" class="split"></div>
+  <p class="hint">مرحله‌ها مربوط به کل مهارت‌اند؛ «تمرین این روز» جداگانه در تاریخ انتخاب‌شده ثبت می‌شود.</p>
+</section>
+
+<section class="card" id="booksCard">
+  <div class="section-head">
+    <h2 class="ribbon">قفسهٔ کتاب‌ها</h2>
+    <span class="decor" aria-hidden="true">♡</span>
+  </div>
+  <form id="bookForm" class="form">
+    <input id="bookInput" type="text" maxlength="200" placeholder="اسم کتاب…" aria-label="نام کتاب" required>
     <button class="btn primary">افزودن</button>
   </form>
   <div id="books"></div>
 </section>
 
-<section class="card">
-  <h2>۰۹ · فیلم و سریال</h2>
-  <form class="form" id="movieForm">
-    <input id="movieInput" type="text" maxlength="200" placeholder="نام فیلم یا سریال…" aria-label="نام فیلم یا سریال" required>
+<section class="card" id="moviesCard">
+  <div class="section-head">
+    <h2 class="ribbon">فیلم و سریال</h2>
+    <span class="decor" aria-hidden="true">☆</span>
+  </div>
+  <form id="movieForm" class="form">
+    <input id="movieInput" type="text" maxlength="200" placeholder="اسم فیلم یا سریال…" aria-label="نام فیلم یا سریال" required>
     <button class="btn primary">افزودن</button>
   </form>
   <div id="movies"></div>
 </section>
 
-<details class="card wide">
+<details class="card wide settings" id="settings">
   <summary>تنظیمات و پشتیبان‌گیری</summary>
-  <p class="hint">اطلاعات ابری نیستند. پاک‌کردن داده‌های مرورگر ممکن است آن‌ها را حذف کند؛ مرتب پشتیبان بگیر.</p>
-  <div class="row">
+  <p class="hint">
+    اطلاعات ابری نیستند. داده‌های گوشی و لپ‌تاپ خودکار همگام نمی‌شوند.
+    برای انتقال، پشتیبان را دانلود و روی دستگاه دیگر بازیابی کن.
+    بازیابی، اطلاعات فعلی آن دستگاه را جایگزین می‌کند.
+  </p>
+  <div class="row" style="margin-top:16px">
     <button class="btn primary" id="export">دانلود پشتیبان JSON</button>
     <button class="btn" id="import">بازیابی پشتیبان</button>
+    <button class="btn" id="addPdf">افزودن گزینه‌های خوانای PDF</button>
     <button class="btn danger" id="reset">پاک‌کردن اطلاعات</button>
   </div>
   <input id="importFile" type="file" accept=".json,application/json" hidden>
-  <p class="hint">بازیابی فقط فایل پشتیبان همین نسخه را می‌پذیرد و اطلاعات فعلی را جایگزین می‌کند.</p>
-  <h3 style="margin-top:20px">مدیریت عادت‌ها</h3>
-  <div id="habitSettings"></div>
-  <p class="hint">حذف عادت، ثبت‌های مربوط به آن را نیز حذف می‌کند.</p>
+  <p class="hint">
+    افزودن گزینه‌های PDF، موارد فعلی را حذف نمی‌کند. نام‌های مبهم را بعد از بررسی نسخهٔ اصلی، خودت اضافه کن.
+  </p>
+
+  <div class="settings-grid">
+    <div>
+      <h3>مدیریت عادت‌ها و یادآوری‌ها</h3>
+      <div id="habitSettings"></div>
+      <p class="hint">حذف عادت، تیک‌های همان عادت را هم از روزهای قبلی حذف می‌کند.</p>
+    </div>
+    <div>
+      <h3>مدیریت غذا</h3>
+      <form id="foodForm" class="form">
+        <input id="foodInput" type="text" maxlength="100" placeholder="گزینهٔ غذایی جدید…" aria-label="گزینه غذایی" required>
+        <button class="btn">افزودن</button>
+      </form>
+      <div id="foodSettings"></div>
+      <p class="hint">حذف گزینهٔ غذایی، ثبت‌های مربوط به آن را هم حذف می‌کند.</p>
+    </div>
+  </div>
 </details>
+
 </div>
-<footer>لازم نیست روز بی‌نقص باشد؛ کافی است یک قدم کوچک برداری.</footer>
+
+<footer>
+  لازم نیست روز بی‌نقص باشد؛ کافی است یک قدم کوچک برداری.
+  <strong dir="ltr">♡ plan your day, your way ♡</strong>
+</footer>
 </main>
 
 <script>
 'use strict';
+
+/* کلید و شناسهٔ نسخهٔ قبل برای سازگاری حفظ شده‌اند. */
 const KEY='nadia.compact.planner.v1';
 const APP='nadia-compact';
 const $=id=>document.getElementById(id);
+const has=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
 const fa=n=>new Intl.NumberFormat('fa-IR',{maximumFractionDigits:2}).format(n);
-const escapeHTML=s=>String(s).replace(/[&<>"']/g,c=>({
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({
   '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
 }[c]));
 const uid=()=>globalThis.crypto?.randomUUID?.()||
   'id'+Date.now().toString(36)+Math.random().toString(36).slice(2);
+
 function today(){
   const d=new Date();
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
@@ -235,20 +683,29 @@ function date(k){
   const [y,m,d]=k.split('-').map(Number);
   return new Date(Date.UTC(y,m-1,d,12));
 }
+function validDate(k){
+  if(typeof k!=='string'||!/^(19|20|21)\d{2}-\d{2}-\d{2}$/.test(k))return false;
+  const d=date(k);
+  return Number.isFinite(d.getTime())&&d.toISOString().slice(0,10)===k;
+}
 function shift(k,n){
-  const d=date(k);d.setUTCDate(d.getUTCDate()+n);
+  const d=date(k);
+  d.setUTCDate(d.getUTCDate()+n);
   return d.toISOString().slice(0,10);
 }
-function validDate(k){
-  return typeof k==='string'&&/^(19|20|21)\d{2}-\d{2}-\d{2}$/.test(k)&&
-    Number.isFinite(date(k).getTime())&&date(k).toISOString().slice(0,10)===k;
-}
 const diff=(a,b)=>Math.round((date(a)-date(b))/86400000);
-const fullFmt=new Intl.DateTimeFormat('fa-IR-u-ca-persian',{timeZone:'UTC',year:'numeric',month:'long',day:'numeric'});
-const monthFmt=new Intl.DateTimeFormat('fa-IR-u-ca-persian',{timeZone:'UTC',year:'numeric',month:'long'});
+const fullFmt=new Intl.DateTimeFormat('fa-IR-u-ca-persian',{
+  timeZone:'UTC',year:'numeric',month:'long',day:'numeric'
+});
+const monthFmt=new Intl.DateTimeFormat('fa-IR-u-ca-persian',{
+  timeZone:'UTC',year:'numeric',month:'long'
+});
 const weekdayFmt=new Intl.DateTimeFormat('fa-IR',{timeZone:'UTC',weekday:'long'});
-const partsFmt=new Intl.DateTimeFormat('en-US-u-ca-persian-nu-latn',{timeZone:'UTC',day:'numeric'});
-const persianDay=k=>Number(partsFmt.formatToParts(date(k)).find(x=>x.type==='day').value);
+const partsFmt=new Intl.DateTimeFormat('en-US-u-ca-persian-nu-latn',{
+  timeZone:'UTC',day:'numeric'
+});
+const persianDay=k=>Number(partsFmt.formatToParts(date(k)).find(p=>p.type==='day').value);
+
 function month(k){
   const start=shift(k,1-persianDay(k));
   let next=shift(start,29);
@@ -259,325 +716,491 @@ function week(k){
   const start=shift(k,-((date(k).getUTCDay()+1)%7));
   return Array.from({length:7},(_,i)=>shift(start,i));
 }
+const LEGACY_FOOD=[
+  {id:'water',name:'آب کافی'},
+  {id:'fruit',name:'میوه'},
+  {id:'vegetables',name:'سبزیجات'},
+  {id:'regular',name:'وعده‌های منظم'}
+];
+const PDF_FOOD=[
+  {id:'pdf_eggs',name:'۴ تخم‌مرغ'},
+  {id:'pdf_meat',name:'۱۰۰ گرم گوشت'},
+  {id:'pdf_chicken',name:'۱۰۰ گرم مرغ'},
+  {id:'pdf_tuna',name:'یک تن ماهی کامل'},
+  {id:'pdf_peanut',name:'کرهٔ بادام‌زمینی'},
+  {id:'pdf_salad',name:'سالاد'}
+];
+const PDF_HABITS=[
+  {id:'pdf_iron',name:'آهن'},
+  {id:'pdf_inositol',name:'اینوزیتول'},
+  {id:'pdf_dutasteride',name:'دوتاستراید'},
+  {id:'pdf_topical',name:'محلول پوستی'},
+  {id:'pdf_adapalene',name:'آداپالن (شب)'},
+  {id:'pdf_hairgrowth',name:'Hair Growth'},
+  {id:'pdf_english',name:'مطالعه زبان'},
+  {id:'pdf_learning',name:'یادگیری'},
+  {id:'pdf_ai',name:'Elements of AI'},
+  {id:'pdf_book',name:'کتاب خواندن'},
+  {id:'pdf_art',name:'هنر'},
+  {id:'pdf_photoshop',name:'یادگیری فتوشاپ'},
+  {id:'pdf_x',name:'توییتر / X'},
+  {id:'pdf_gm',name:'GM'},
+  {id:'pdf_post',name:'حداقل یک پست'}
+];
+const copyItems=items=>items.map(x=>({...x}));
+const emptyDay=()=>({
+  tasks:[],habits:[],food:[],weekly:[],skills:[],hours:0,note:''
+});
 function defaults(){
   return {
     app:APP,version:1,
-    habits:[
-      {id:'reading',name:'مطالعه'},
-      {id:'movement',name:'حرکت و کشش'},
-      {id:'art',name:'تمرین هنری'},
-      {id:'vocabulary',name:'مرور واژه‌ها'}
-    ],
+    habits:copyItems(PDF_HABITS),
+    foods:copyItems(PDF_FOOD),
     days:{},books:[],movies:[],
+    skills:[
+      {id:'skill_english',name:'انگلیسی',steps:[]},
+      {id:'skill_ai',name:'Elements of AI',steps:[]},
+      {id:'skill_midjourney',name:'Midjourney',steps:[]},
+      {id:'skill_photoshop',name:'فتوشاپ',steps:[]}
+    ],
     lesson:{start:today(),first:3,items:{}}
   };
 }
-const emptyDay=()=>({tasks:[],habits:[],food:[],weekly:[],hours:0,note:''});
-let selected=today(),state=defaults(),storageLocked=false,storageError='';
-const has=(obj,key)=>Object.prototype.hasOwnProperty.call(obj,key);
 
+/* فیلدهای اضافه اختیاری‌اند؛ پشتیبان نسخهٔ قبلی پذیرفته می‌شود. */
 function validate(raw){
-  const fail=()=>{throw Error('فایل پشتیبان معتبر نیست یا مربوط به نسخه دیگری است.')};
+  const fail=()=>{throw Error('فایل معتبر نیست یا متعلق به نسخهٔ سازگار این پلنر نیست.')};
   const obj=x=>x&&typeof x==='object'&&!Array.isArray(x);
-  const text=(x,max)=>{if(typeof x!=='string'||x.length>max)fail();return x};
-  const id=x=>{if(typeof x!=='string'||!/^[a-zA-Z0-9_-]{1,100}$/.test(x))fail();return x};
-  const num=(x,min,max)=>{if(typeof x!=='number'||!Number.isFinite(x)||x<min||x>max)fail();return x};
+  const text=(x,max)=>{
+    if(typeof x!=='string'||x.length>max)fail();
+    return x;
+  };
+  const id=x=>{
+    if(typeof x!=='string'||!/^[a-zA-Z0-9_-]{1,100}$/.test(x))fail();
+    return x;
+  };
+  const num=(x,min,max)=>{
+    if(typeof x!=='number'||!Number.isFinite(x)||x<min||x>max)fail();
+    return x;
+  };
   const bool=x=>{if(typeof x!=='boolean')fail();return x};
-  const array=(x,max=10000)=>{if(!Array.isArray(x)||x.length>max)fail();return x};
-  const ids=x=>array(x,500).map(id);
-  const unique=x=>{if(new Set(x.map(i=>i.id)).size!==x.length)fail();return x};
-  if(!obj(raw)||raw.app!==APP||raw.version!==1||!obj(raw.days)||!obj(raw.lesson))fail();
+  const arr=(x,max)=>{
+    if(!Array.isArray(x)||x.length>max)fail();
+    return x;
+  };
+  const ids=x=>[...new Set(arr(x,500).map(id))];
+  const unique=x=>{
+    if(new Set(x.map(i=>i.id)).size!==x.length)fail();
+    return x;
+  };
+  const named=(x,max,length)=>unique(arr(x,max).map(i=>{
+    if(!obj(i))fail();
+    return {id:id(i.id),name:text(i.name,length)};
+  }));
+
+  if(!obj(raw)||raw.app!==APP||raw.version!==1||
+     !obj(raw.days)||!obj(raw.lesson))fail();
+
   const out=defaults();
-  out.habits=unique(array(raw.habits,200).map(h=>({id:id(h.id),name:text(h.name,80)})));
+  out.habits=named(raw.habits,200,80);
+  out.foods=named(raw.foods===undefined?LEGACY_FOOD:raw.foods,200,100);
   out.days=Object.create(null);
   if(Object.keys(raw.days).length>40000)fail();
+
   for(const [k,d] of Object.entries(raw.days)){
     if(!validDate(k)||!obj(d))fail();
     out.days[k]={
-      tasks:unique(array(d.tasks,1000).map(t=>({id:id(t.id),text:text(t.text,250),done:bool(t.done)}))),
+      tasks:unique(arr(d.tasks,1000).map(t=>{
+        if(!obj(t))fail();
+        return {id:id(t.id),text:text(t.text,250),done:bool(t.done)};
+      })),
       habits:ids(d.habits),food:ids(d.food),weekly:ids(d.weekly),
+      skills:ids(d.skills===undefined?[]:d.skills),
       hours:num(d.hours,0,24),note:text(d.note,12000)
     };
   }
+
   for(const kind of ['books','movies']){
-    out[kind]=unique(array(raw[kind],3000).map(x=>{
-      if(!['want','doing','done'].includes(x.status))fail();
-      return {id:id(x.id),title:text(x.title,200),status:x.status};
+    out[kind]=unique(arr(raw[kind],3000).map(x=>{
+      if(!obj(x)||!['want','doing','done'].includes(x.status))fail();
+      const rating=num(x.rating===undefined?0:x.rating,0,5);
+      if(!Number.isInteger(rating))fail();
+      return {
+        id:id(x.id),title:text(x.title,200),status:x.status,
+        rating,detail:text(x.detail===undefined?'':x.detail,160)
+      };
     }));
   }
-  if(!validDate(raw.lesson.start))fail();
+
+  out.skills=unique(arr(raw.skills===undefined?[]:raw.skills,100).map(s=>{
+    if(!obj(s))fail();
+    return {
+      id:id(s.id),name:text(s.name,100),
+      steps:unique(arr(s.steps,100).map(t=>{
+        if(!obj(t))fail();
+        return {id:id(t.id),title:text(t.title,160),done:bool(t.done)};
+      }))
+    };
+  }));
+
+  if(!validDate(raw.lesson.start)||!obj(raw.lesson.items))fail();
   const first=num(raw.lesson.first,1,9999);
-  if(!Number.isInteger(first)||!obj(raw.lesson.items))fail();
+  if(!Number.isInteger(first))fail();
   out.lesson={start:raw.lesson.start,first,items:Object.create(null)};
   if(Object.keys(raw.lesson.items).length>40000)fail();
+
   for(const [k,v] of Object.entries(raw.lesson.items)){
     if(!/^[1-9]\d{0,5}$/.test(k)||!obj(v))fail();
-    const steps=array(v.steps,7);
-    const reviews=array(v.reviews,4);
+    const steps=arr(v.steps,7),reviews=arr(v.reviews,4);
     if(steps.length!==7||reviews.some(x=>![1,3,7,14].includes(x)))fail();
     out.lesson.items[k]={steps:steps.map(bool),reviews:[...new Set(reviews)]};
   }
   return out;
 }
+
+let state=defaults(),selected=today();
+let locked=false,storageError='',rawStored=null;
+
 try{
-  const raw=localStorage.getItem(KEY);
-  if(raw)state=validate(JSON.parse(raw));
+  rawStored=localStorage.getItem(KEY);
+  if(rawStored)state=validate(JSON.parse(rawStored));
 }catch(e){
-  storageLocked=true;
-  storageError='خواندن داده‌های ذخیره‌شده ممکن نشد. برای حفاظت از آن‌ها، ذخیره خودکار متوقف است. پشتیبان معتبر بازیابی کن یا پس از بررسی، بازنشانی کن.';
+  locked=true;
+  storageError='خواندن اطلاعات قبلی ممکن نشد. برای حفاظت از آن‌ها، ویرایش متوقف است. ابتدا نسخهٔ خام را با دکمهٔ پشتیبان دانلود کن؛ سپس پشتیبان معتبر بازیابی کن یا بازنشانی کن.';
 }
-function day(create=false){
-  if(!has(state.days,selected)&&create)state.days[selected]=emptyDay();
-  return has(state.days,selected)?state.days[selected]:emptyDay();
+function editable(){
+  if(!locked)return true;
+  alert(storageError);return false;
 }
-function dayAt(k){return has(state.days,k)?state.days[k]:emptyDay()}
-function save(){
-  if(storageLocked){showMessage();return}
-  try{
-    localStorage.setItem(KEY,JSON.stringify(state));
-    storageError='';
-  }catch(e){
-    storageError='ذخیره مرورگر ناموفق بود؛ تغییرات فعلاً در حافظه‌اند. پشتیبان دانلود کن.';
-  }
-  showMessage();
+function dayAt(k,create=false){
+  if(!has(state.days,k)&&create)state.days[k]=emptyDay();
+  return has(state.days,k)?state.days[k]:emptyDay();
 }
-function showMessage(){
-  $('message').textContent=storageError||
-    (selected>today()?'روز آینده: برنامه‌ریزی و یادداشت آزاد است؛ ثبت انجام تا رسیدن آن روز غیرفعال است.':'اطلاعات روی همین مرورگر ذخیره می‌شوند.');
-}
-function change(){save();render()}
-function choose(k){if(validDate(k)){selected=k;render()}}
+const day=(create=false)=>dayAt(selected,create);
+const future=()=>selected>today();
 function toggle(list,value){
   const i=list.indexOf(value);
   if(i<0)list.push(value);else list.splice(i,1);
 }
-const foodItems=[['water','آب کافی'],['fruit','میوه'],['vegetables','سبزیجات'],['regular','وعده‌های منظم']];
-const weeklyItems=[['gym','باشگاه',3],['class','کلاس زبان',2]];
-const stepNames=['گوش‌دادن بدون متن','دیکته / ترنسکریپشن (اختیاری)','گوش‌دادن همراه متن','واژه‌ها و عبارت‌های مهم','خلاصه‌گویی','تقلید تلفظ و آهنگ','شدوئینگ'];
-const disabled=()=>selected>today()?'disabled':'';
-function pill(field,id,label,on){
-  return `<button class="pill ${on?'on':''}" data-action="toggle" data-field="${field}" data-id="${escapeHTML(id)}" aria-pressed="${on}" ${disabled()}>${on?'✓ ':''}${escapeHTML(label)}</button>`;
+function save(){
+  if(locked)return;
+  try{
+    const data=JSON.stringify(state);
+    localStorage.setItem(KEY,data);
+    rawStored=data;storageError='';
+  }catch(e){
+    storageError='ذخیره در مرورگر ناموفق بود. تغییرات فعلاً در حافظه‌اند؛ قبل از بستن صفحه پشتیبان دانلود کن.';
+  }
+  showMessage();
 }
+function showMessage(){
+  $('message').classList.toggle('error',!!storageError);
+  $('message').textContent=storageError||(
+    future()
+      ?'روز آینده: افزودن کار و یادداشت آزاد است؛ ثبت انجام هنوز فعال نیست.'
+      :'ذخیرهٔ محلی در همین مرورگر · پیشرفت بالا از تیک‌های روزانه و کارها محاسبه می‌شود.'
+  );
+}
+function change(){save();render()}
+function choose(k){
+  if(validDate(k)){selected=k;render()}
+}
+function setValue(id,value){
+  if(document.activeElement!==$(id))$(id).value=value;
+}
+function buttonPill(field,id,label,on,k=selected){
+  return `<button class="pill ${on?'on':''}" data-action="toggle"
+    data-field="${field}" data-id="${esc(id)}" data-day="${k}"
+    aria-pressed="${on}" ${k>today()?'disabled':''}>${esc(label)}</button>`;
+}
+function meaningful(d){
+  return !!(d.tasks.length||d.habits.length||d.food.length||
+    d.weekly.length||d.skills.length||d.hours||d.note.trim());
+}
+function lessonItem(n,create=false){
+  if(!has(state.lesson.items,n)&&create){
+    state.lesson.items[n]={steps:Array(7).fill(false),reviews:[]};
+  }
+  return has(state.lesson.items,n)
+    ?state.lesson.items[n]:{steps:Array(7).fill(false),reviews:[]};
+}
+const lessonNumber=k=>state.lesson.first+diff(k,state.lesson.start);
+function lessonRecorded(k){
+  if(k<state.lesson.start)return false;
+  const n=lessonNumber(k);
+  if(lessonItem(n).steps.some(Boolean))return true;
+  return [1,3,7,14].some(g=>
+    n-g>=state.lesson.first&&lessonItem(n-g).reviews.includes(g)
+  );
+}
+function recorded(k){return meaningful(dayAt(k))||lessonRecorded(k)}
+function monthKeys(){
+  const m=month(selected);
+  return Array.from({length:m.length},(_,i)=>shift(m.start,i));
+}
+function countHabit(d){
+  return state.habits.filter(h=>d.habits.includes(h.id)).length;
+}
+
 function renderHeader(){
   const d=day(),done=d.tasks.filter(t=>t.done).length;
+  const checked=countHabit(d);
+  const total=state.habits.length+d.tasks.length;
+  const progress=total?Math.round(100*(checked+done)/total):0;
+
+  $('dayNumber').textContent=fa(persianDay(selected));
   $('dateTitle').textContent=fullFmt.format(date(selected));
   $('weekday').textContent=weekdayFmt.format(date(selected))+(selected===today()?' · امروز':'');
-  const checked=state.habits.filter(h=>d.habits.includes(h.id)).length;
   $('habitScore').textContent=fa(state.habits.length?Math.round(100*checked/state.habits.length):0)+'٪';
   $('taskScore').textContent=fa(done)+' / '+fa(d.tasks.length);
   $('weeklyHours').textContent=fa(week(selected).reduce((s,k)=>s+dayAt(k).hours,0));
+  $('overallFill').style.width=progress+'%';
+  $('overallBar').setAttribute('aria-valuenow',progress);
+  $('progressText').textContent=fa(progress)+'٪';
+
+  const now=new Date(),h=now.getHours();
+  const greeting=h<5?'شب بخیر':h<12?'صبح بخیر':h<17?'روز بخیر':h<21?'عصر بخیر':'شب بخیر';
+  $('greeting').textContent=greeting+'، نادیا ♡ · '+now.toLocaleTimeString('fa-IR',{
+    hour:'2-digit',minute:'2-digit'
+  });
   showMessage();
+}
+function renderHabits(){
+  const days=week(selected);
+  $('weekRange').textContent=fullFmt.format(date(days[0]))+' تا '+fullFmt.format(date(days[6]));
+
+  let html='<thead><tr><th scope="col">یادآوری / عادت</th>';
+  html+=days.map(k=>`<th scope="col" class="${k===selected?'active-col':''}">
+    ${esc(weekdayFmt.format(date(k)))}<small>${fa(persianDay(k))}</small></th>`).join('');
+  html+='<th scope="col">هفته</th></tr></thead><tbody>';
+
+  html+=state.habits.map(h=>{
+    const count=days.filter(k=>dayAt(k).habits.includes(h.id)).length;
+    return `<tr><th scope="row">${esc(h.name)}</th>`+days.map(k=>{
+      const on=dayAt(k).habits.includes(h.id);
+      return `<td class="${k===selected?'active-col':''}">
+        <button class="tick ${on?'on':''}" data-action="toggle"
+          data-field="habits" data-id="${esc(h.id)}" data-day="${k}"
+          aria-label="${esc(h.name+'؛ '+fullFmt.format(date(k)))}"
+          aria-pressed="${on}" ${k>today()?'disabled':''}>${on?'✓':''}</button>
+      </td>`;
+    }).join('')+`<td><span class="badge">${fa(count)} / ۷</span></td></tr>`;
+  }).join('');
+  $('habitTable').innerHTML=html+'</tbody>';
+  if(!state.habits.length)$('habitTable').innerHTML='<tbody><tr><td>اولین یادآوری‌ات را اضافه کن.</td></tr></tbody>';
+
+  $('habitSettings').innerHTML=state.habits.map(h=>`
+    <div class="item">
+      <span class="grow">${esc(h.name)}</span>
+      <button class="icon" data-action="delete-habit" data-id="${esc(h.id)}"
+        aria-label="حذف ${esc(h.name)}">×</button>
+    </div>`).join('');
 }
 function renderTasks(){
   $('tasks').innerHTML=day().tasks.map(t=>`
     <li class="item">
-      <label><input type="checkbox" data-action="task" data-id="${escapeHTML(t.id)}" ${t.done?'checked':''} ${disabled()}>
-      <span class="${t.done?'done':''}">${escapeHTML(t.text)}</span></label>
-      <button class="icon" data-action="delete-task" data-id="${escapeHTML(t.id)}" aria-label="حذف کار">×</button>
-    </li>`).join('')||'<li class="empty">هنوز کاری برای این روز ثبت نشده.</li>';
-}
-function renderHabits(){
-  const d=day();
-  $('habits').innerHTML=state.habits.map(h=>pill('habits',h.id,h.name,d.habits.includes(h.id))).join('');
-  $('habitSettings').innerHTML=state.habits.map(h=>`
-    <div class="row between item"><span>${escapeHTML(h.name)}</span>
-    <button class="btn danger" data-action="delete-habit" data-id="${escapeHTML(h.id)}">حذف</button></div>`).join('');
+      <label>
+        <input type="checkbox" data-action="task" data-id="${esc(t.id)}"
+          ${t.done?'checked':''} ${future()?'disabled':''}>
+        <span class="${t.done?'done':''}">${esc(t.text)}</span>
+      </label>
+      <button class="icon" data-action="delete-task" data-id="${esc(t.id)}"
+        aria-label="حذف ${esc(t.text)}">×</button>
+    </li>`).join('')||'<li class="empty">این صفحه هنوز منتظر اولین قدم توست.</li>';
+
+  const all=week(selected).flatMap(k=>dayAt(k).tasks);
+  $('weekTaskSummary').textContent='این هفته: '+fa(all.filter(t=>t.done).length)+' از '+fa(all.length)+' کار';
+  $('clearDone').disabled=!day().tasks.some(t=>t.done);
+
+  const pending=[];
+  for(const k of Object.keys(state.days).sort()){
+    if(k>=selected)continue;
+    for(const t of dayAt(k).tasks)if(!t.done)pending.push({k,t});
+  }
+  $('overdueTitle').textContent='کارهای بازِ روزهای قبل · '+fa(pending.length);
+  $('overdue').innerHTML=pending.slice(0,30).map(({k,t})=>`
+    <a href="#tasksCard" data-action="date" data-date="${k}">
+      ${esc(t.text)} <small>· ${esc(fullFmt.format(date(k)))}</small>
+    </a>`).join('')||'<p>کاری از روزهای قبل باز نمانده است.</p>';
+  if(pending.length>30)$('overdue').innerHTML+='<p>۳۰ مورد قدیمی‌تر نمایش داده شده؛ سایر موارد در تاریخ خودشان باقی‌اند.</p>';
 }
 function renderCare(){
-  const d=day();
-  $('food').innerHTML=foodItems.map(([id,name])=>pill('food',id,name,d.food.includes(id))).join('');
-  $('weekly').innerHTML=weeklyItems.map(([id,name])=>pill('weekly',id,name,d.weekly.includes(id))).join('');
-  $('weeklySummary').textContent=weeklyItems.map(([id,name,target])=>{
-    const count=week(selected).filter(k=>dayAt(k).weekly.includes(id)).length;
-    return `${name}: ${fa(count)} از ${fa(target)} روز`;
-  }).join(' · ');
-  $('hours').value=d.hours;
-  $('hours').disabled=selected>today();
+  const d=day(),days=week(selected);
+  $('food').innerHTML=state.foods.map(f=>
+    buttonPill('food',f.id,f.name,d.food.includes(f.id))
+  ).join('')||'<p class="empty">گزینه‌های غذا را از تنظیمات اضافه کن.</p>';
+
+  $('foodSettings').innerHTML=state.foods.map(f=>`
+    <div class="item"><span class="grow">${esc(f.name)}</span>
+      <button class="icon" data-action="delete-food" data-id="${esc(f.id)}"
+        aria-label="حذف ${esc(f.name)}">×</button>
+    </div>`).join('');
+
+  $('weekly').innerHTML=[
+    ['gym','باشگاه این روز'],['class','کلاس / جبرانی این روز']
+  ].map(([id,name])=>buttonPill('weekly',id,name,d.weekly.includes(id))).join('');
+
+  const gym=days.filter(k=>dayAt(k).weekly.includes('gym')).length;
+  const cls=days.filter(k=>dayAt(k).weekly.includes('class')).length;
+  $('weeklySummary').textContent=`باشگاه: ${fa(gym)} از ۳ روز · کلاس زبان: ${fa(cls)} از ۲ روز`;
+
+  setValue('hours',d.hours);
+  $('hours').disabled=future();
   $('hoursBar').style.width=Math.min(100,d.hours/3*100)+'%';
+  $('dailyHoursText').textContent=fa(d.hours)+' ساعت ثبت شده';
+  $('hoursQuick').innerHTML=[.5,1,1.5,2,2.5,3,4].map(n=>`
+    <button class="btn ${d.hours===n?'primary':''}" data-action="hours" data-hours="${n}"
+      aria-label="ثبت ${fa(n)} ساعت مطالعه" ${future()?'disabled':''}>${fa(n)} ساعت</button>`).join('');
+
+  const total=days.reduce((s,k)=>s+dayAt(k).hours,0);
+  $('languageWeek').textContent='این هفته '+fa(total)+' از ۱۴ ساعت؛ هدف روزانهٔ پایه ۲ ساعت است.';
+
+  const elapsed=days.filter(k=>k<=today()&&k<=selected);
+  const missedClass=elapsed.filter(k=>
+    [1,3].includes(date(k).getUTCDay())&&!dayAt(k).weekly.includes('class')
+  );
+  const alerts=[];
+  if(missedClass.length&&cls<2)alerts.push('برای بعضی روزهای مقرر کلاس، حضور ثبت نشده؛ اگر جبرانی داشتی در همان تاریخ ثبت کن.');
+  if(selected<=today()&&d.hours>0&&d.hours<2)alerts.push('زمان امروز ثبت شد؛ قدم کوچک هم حساب می‌شود.');
+  $('languageAlerts').innerHTML=alerts.map(t=>'<p>'+esc(t)+'</p>').join('');
 }
-function lessonItem(n,create=false){
-  if(!has(state.lesson.items,n)&&create)
-    state.lesson.items[n]={steps:Array(7).fill(false),reviews:[]};
-  return has(state.lesson.items,n)?state.lesson.items[n]:{steps:Array(7).fill(false),reviews:[]};
-}
-function lessonNumber(){return state.lesson.first+diff(selected,state.lesson.start)}
+
+const stepNames=[
+  ['گوش‌دادن بدون متن','تا ۳ بار؛ برای آشنایی با موضوع'],
+  ['دیکته / ترنسکریپشن','اختیاری؛ برای جزئیات و ساختارها'],
+  ['گوش‌دادن همراه متن','لغات و تلفظ‌ها را پیدا کن'],
+  ['هایلایت و جستجو','واژه‌ها و ایده‌های جدید را بررسی کن'],
+  ['خلاصه‌گویی','بلند و به انگلیسی تعریف کن'],
+  ['تقلید تلفظ و آهنگ','تلفظ و لحن گوینده را تکرار کن'],
+  ['شدوئینگ','همزمان با گوینده حرف بزن']
+];
 function renderLesson(){
-  $('lessonStart').value=state.lesson.start;
-  $('lessonFirst').value=state.lesson.first;
-  const n=lessonNumber();
+  setValue('lessonStart',state.lesson.start);
+  setValue('lessonFirst',state.lesson.first);
+  const n=lessonNumber(selected);
   if(selected<state.lesson.start){
-    $('lessonTitle').textContent='شروع برنامه: '+fullFmt.format(date(state.lesson.start));
+    $('lessonTitle').textContent='شروع: '+fullFmt.format(date(state.lesson.start));
+    $('lessonScore').textContent='هنوز شروع نشده';
     $('lessonSteps').innerHTML='';
-    $('reviews').innerHTML='<p class="empty">برنامه هنوز شروع نشده است.</p>';
-    return;
+    $('reviews').innerHTML='<p class="empty">مرورها بعد از شروع برنامه ظاهر می‌شوند.</p>';
+  }else{
+    const item=lessonItem(n);
+    $('lessonTitle').textContent='یونیت '+fa(n)+' · روز '+fa(diff(selected,state.lesson.start)+1);
+    $('lessonScore').textContent=fa(item.steps.filter(Boolean).length)+' از ۷ مرحله';
+    $('lessonSteps').innerHTML=stepNames.map(([title,help],i)=>`
+      <li class="item lesson-step">
+        <label>
+          <input type="checkbox" data-action="step" data-index="${i}"
+            ${item.steps[i]?'checked':''} ${future()?'disabled':''}>
+          <span>${title}<small>${help}</small></span>
+        </label>
+      </li>`).join('');
+    $('reviews').innerHTML=[1,3,7,14].filter(g=>n-g>=state.lesson.first).map(g=>{
+      const on=lessonItem(n-g).reviews.includes(g);
+      return `<button class="pill ${on?'on':''}" data-action="review" data-gap="${g}"
+        aria-pressed="${on}" ${future()?'disabled':''}>
+        درس ${fa(n-g)} · مرور ${fa(g)}روزه
+      </button>`;
+    }).join('')||'<p class="empty">برای این روز مروری نیست.</p>';
   }
-  $('lessonTitle').textContent='درس '+fa(n);
-  const item=lessonItem(n);
-  $('lessonSteps').innerHTML=stepNames.map((name,i)=>`
-    <li class="item"><label>
-    <input type="checkbox" data-action="step" data-index="${i}" ${item.steps[i]?'checked':''} ${disabled()}>
-    <span>${name}</span></label></li>`).join('');
-  $('reviews').innerHTML=[1,3,7,14].filter(g=>n-g>=state.lesson.first).map(g=>{
-    const on=lessonItem(n-g).reviews.includes(g);
-    return `<button class="pill ${on?'on':''}" data-action="review" data-gap="${g}" aria-pressed="${on}" ${disabled()}>
-    ${on?'✓ ':''}درس ${fa(n-g)} · مرور ${fa(g)}روزه</button>`;
-  }).join('')||'<p class="empty">برای این روز مروری تعیین نشده است.</p>';
+
+  const start=selected<state.lesson.start?state.lesson.start:selected;
+  $('lessonSchedule').innerHTML=`
+    <thead><tr><th>تاریخ</th><th>درس جدید</th><th>۱ روز</th><th>۳ روز</th><th>۷ روز</th><th>۱۴ روز</th></tr></thead>
+    <tbody>`+Array.from({length:14},(_,i)=>{
+      const k=shift(start,i),num=lessonNumber(k);
+      return `<tr class="${k===selected?'current':''}">
+        <td><button class="btn" data-action="date" data-date="${k}">${esc(fullFmt.format(date(k)))}</button></td>
+        <td>${fa(num)}</td>`+[1,3,7,14].map(g=>
+          `<td>${num-g>=state.lesson.first?fa(num-g):'—'}</td>`
+        ).join('')+'</tr>';
+    }).join('')+'</tbody>';
 }
 function renderCalendar(){
   const m=month(selected),offset=(date(m.start).getUTCDay()+1)%7;
   $('monthTitle').textContent=monthFmt.format(date(selected));
-  let html=['ش','ی','د','س','چ','پ','ج'].map(x=>`<span class="weekday">${x}</span>`).join('');
-  html+='<span></span>'.repeat(offset);
+  let html=['ش','ی','د','س','چ','پ','ج'].map(x=>'<span class="weekday">'+x+'</span>').join('');
+  html+='<span aria-hidden="true"></span>'.repeat(offset);
+
   for(let i=0;i<m.length;i++){
     const k=shift(m.start,i);
-    html+=`<button class="date ${has(state.days,k)?'recorded':''} ${k===selected?'selected':''} ${k===today()?'today':''}"
-      data-action="date" data-date="${k}" aria-label="${escapeHTML(fullFmt.format(date(k)))}"
+    html+=`<button class="date ${recorded(k)?'recorded':''} ${k===selected?'selected':''} ${k===today()?'today':''}"
+      data-action="date" data-date="${k}" aria-label="${esc(fullFmt.format(date(k)))}"
       aria-pressed="${k===selected}" ${k===today()?'aria-current="date"':''}>${fa(i+1)}</button>`;
   }
   $('calendar').innerHTML=html;
+  renderReports();
+}
+function renderReports(){
+  const keys=monthKeys().filter(k=>k<=today());
+  const registered=keys.filter(recorded);
+  const avg=registered.length&&state.habits.length
+    ?Math.round(100*registered.reduce((s,k)=>s+countHabit(dayAt(k)),0)/(registered.length*state.habits.length)):0;
+  const gym=keys.filter(k=>dayAt(k).weekly.includes('gym')).length;
+  const cls=keys.filter(k=>dayAt(k).weekly.includes('class')).length;
+
+  $('monthStats').innerHTML=[
+    [fa(avg)+'٪','میانگین تیک‌های روزانه'],
+    [fa(registered.length),'روز دارای ثبت'],
+    [fa(gym),'روز باشگاه'],
+    [fa(cls),'روز کلاس زبان']
+  ].map(([n,label])=>`<div><b>${n}</b>${label}</div>`).join('');
+
+  const total=keys.reduce((s,k)=>s+dayAt(k).hours,0);
+  const study=keys.filter(k=>dayAt(k).hours>0).length;
+  const reached=keys.filter(k=>dayAt(k).hours>=2).length;
+  const tracked=registered.length;
+  const noLanguage=registered.filter(k=>dayAt(k).hours===0).length;
+
+  $('languageStats').innerHTML=[
+    [fa(total),'مجموع ساعت ماه'],
+    [fa(study),'روز دارای مطالعه'],
+    [fa(reached),'روز با حداقل ۲ ساعت'],
+    [fa(noLanguage),'روز ثبت‌شده بدون ساعت زبان']
+  ].map(([n,label])=>`<div><b>${n}</b>${label}</div>`).join('');
+
+  $('languageReport').textContent=tracked
+    ?`در ${fa(tracked)} روز دارای ثبت، ${fa(reached)} روز به هدف پایه رسیده‌ای. روزهای بدون هیچ ثبت، روزِ بدون مطالعه فرض نمی‌شوند.`
+    :'هنوز برای این ماه داده‌ای ثبت نشده است.';
+}
+function renderSkills(){
+  const keys=monthKeys().filter(k=>k<=today());
+  $('skills').innerHTML=state.skills.map(s=>{
+    const done=s.steps.filter(t=>t.done).length;
+    const percent=s.steps.length?Math.round(done/s.steps.length*100):0;
+    const practice=keys.filter(k=>dayAt(k).skills.includes(s.id)).length;
+    return `<div class="skill">
+      <div class="row between">
+        <h3>${esc(s.name)}</h3>
+        <button class="icon" data-action="delete-skill" data-id="${esc(s.id)}" aria-label="حذف مهارت ${esc(s.name)}">×</button>
+      </div>
+      <div class="row between">
+        <small>${fa(done)} از ${fa(s.steps.length)} مرحله</small>
+        <small>${fa(practice)} روز تمرین این ماه</small>
+      </div>
+      <div class="bar"><i style="width:${percent}%"></i></div>
+      ${buttonPill('skills',s.id,'تمرین این روز',day().skills.includes(s.id))}
+      <ul class="list" style="margin-top:10px">`+
+      s.steps.map(t=>`<li class="item">
+        <label><input type="checkbox" data-action="skill-step" data-id="${esc(s.id)}"
+          data-step="${esc(t.id)}" ${t.done?'checked':''}>
+          <span class="${t.done?'done':''}">${esc(t.title)}</span></label>
+        <button class="icon" data-action="delete-skill-step" data-id="${esc(s.id)}"
+          data-step="${esc(t.id)}" aria-label="حذف مرحله ${esc(t.title)}">×</button>
+      </li>`).join('')+
+      `</ul><form class="form" data-skill-form="${esc(s.id)}">
+        <input name="step" type="text" maxlength="160" placeholder="مرحلهٔ تازه…" aria-label="مرحلهٔ تازه برای ${esc(s.name)}" required>
+        <button class="btn">افزودن</button>
+      </form></div>`;
+  }).join('')||'<p class="empty">اولین مهارتی را که یاد می‌گیری اضافه کن.</p>';
 }
 function renderLibrary(kind){
-  const labels=kind==='books'?['می‌خواهم بخوانم','در حال خواندن','خوانده‌ام']:['می‌خواهم ببینم','در حال تماشا','دیده‌ام'];
+  const labels=kind==='books'
+    ?['می‌خواهم بخوانم','در حال خواندن','خوانده‌ام']
+    :['می‌خواهم ببینم','در حال تماشا','دیده‌ام'];
   $(kind).innerHTML=state[kind].map(x=>`
     <div class="library-item">
-      <div class="row between"><b style="overflow-wrap:anywhere">${escapeHTML(x.title)}</b>
-      <button class="icon" data-action="delete-library" data-kind="${kind}" data-id="${escapeHTML(x.id)}" aria-label="حذف مورد">×</button></div>
-      <select data-library="${kind}" data-id="${escapeHTML(x.id)}" aria-label="وضعیت ${escapeHTML(x.title)}">
-        ${['want','doing','done'].map((s,i)=>`<option value="${s}" ${s===x.status?'selected':''}>${labels[i]}</option>`).join('')}
-      </select>
-    </div>`).join('')||'<p class="empty">این قفسه هنوز خالی است.</p>';
-}
-function render(){
-  renderHeader();renderTasks();renderHabits();renderCare();renderLesson();renderCalendar();
-  renderLibrary('books');renderLibrary('movies');
-  $('notes').value=day().note;
-}
-$('previousDay').onclick=()=>choose(shift(selected,-1));
-$('nextDay').onclick=()=>choose(shift(selected,1));
-$('today').onclick=()=>choose(today());
-$('previousMonth').onclick=()=>choose(month(shift(month(selected).start,-1)).start);
-$('nextMonth').onclick=()=>choose(month(selected).next);
-
-$('taskForm').onsubmit=e=>{
-  e.preventDefault();
-  const text=$('taskInput').value.trim();if(!text)return;
-  if(day().tasks.length>=1000)return alert('حداکثر تعداد کارهای این روز ثبت شده است.');
-  day(true).tasks.push({id:uid(),text,done:false});
-  $('taskInput').value='';change();
-};
-$('habitForm').onsubmit=e=>{
-  e.preventDefault();
-  const name=$('habitInput').value.trim();if(!name)return;
-  if(state.habits.length>=200)return alert('حداکثر تعداد عادت‌ها ثبت شده است.');
-  state.habits.push({id:uid(),name});
-  $('habitInput').value='';change();
-};
-$('hours').onchange=()=>{
-  const n=$('hours').valueAsNumber;
-  if(selected>today()||!Number.isFinite(n)||n<0||n>24){renderCare();return}
-  day(true).hours=n;change();
-};
-$('notes').oninput=()=>{
-  day(true).note=$('notes').value;
-  save();renderCalendar();
-};
-$('lessonForm').onsubmit=e=>{
-  e.preventDefault();
-  const start=$('lessonStart').value,first=$('lessonFirst').valueAsNumber;
-  if(!validDate(start)||!Number.isInteger(first)||first<1||first>9999)return;
-  if(Object.keys(state.lesson.items).length&&!confirm('تغییر برنامه، تاریخ درس‌ها و مرورها را جابه‌جا می‌کند؛ ثبت‌های قبلی باقی می‌مانند. ادامه می‌دهی؟'))return;
-  state.lesson.start=start;state.lesson.first=first;change();
-};
-for(const [form,input,kind] of [['bookForm','bookInput','books'],['movieForm','movieInput','movies']]){
-  $(form).onsubmit=e=>{
-    e.preventDefault();
-    const title=$(input).value.trim();if(!title)return;
-    if(state[kind].length>=3000)return alert('حداکثر تعداد موارد ثبت شده است.');
-    state[kind].push({id:uid(),title,status:'want'});
-    $(input).value='';change();
-  };
-}
-document.addEventListener('change',e=>{
-  const el=e.target;
-  if(!el.matches('select[data-library]'))return;
-  const kind=el.dataset.library;
-  if(!['books','movies'].includes(kind))return;
-  const item=state[kind].find(x=>x.id===el.dataset.id);
-  if(item){item.status=el.value;save()}
-});
-document.addEventListener('click',e=>{
-  const el=e.target.closest('[data-action]');
-  if(!el||el.disabled)return;
-  const a=el.dataset.action,id=el.dataset.id;
-  if(a==='date'){choose(el.dataset.date);return}
-  if(['toggle','task','step','review'].includes(a)&&selected>today())return;
-  if(a==='toggle'){
-    const field=el.dataset.field;
-    if(!['habits','food','weekly'].includes(field))return;
-    toggle(day(true)[field],id);
-  }else if(a==='task'){
-    const t=day().tasks.find(x=>x.id===id);if(!t)return;t.done=el.checked;
-  }else if(a==='delete-task'){
-    if(!confirm('این کار حذف شود؟'))return;
-    day(true).tasks=day().tasks.filter(x=>x.id!==id);
-  }else if(a==='delete-habit'){
-    if(!confirm('عادت و تمام ثبت‌های مربوط به آن حذف شوند؟'))return;
-    state.habits=state.habits.filter(x=>x.id!==id);
-    Object.values(state.days).forEach(d=>{d.habits=d.habits.filter(x=>x!==id)});
-  }else if(a==='step'){
-    lessonItem(lessonNumber(),true).steps[Number(el.dataset.index)]=el.checked;
-  }else if(a==='review'){
-    const gap=Number(el.dataset.gap);
-    toggle(lessonItem(lessonNumber()-gap,true).reviews,gap);
-  }else if(a==='delete-library'){
-    const kind=el.dataset.kind;
-    if(!['books','movies'].includes(kind)||!confirm('این مورد حذف شود؟'))return;
-    state[kind]=state[kind].filter(x=>x.id!==id);
-  }else return;
-  change();
-});
-function download(){
-  const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});
-  const url=URL.createObjectURL(blob),a=document.createElement('a');
-  a.href=url;a.download=`nadia-planner-${today()}.json`;
-  document.body.appendChild(a);a.click();a.remove();
-  setTimeout(()=>URL.revokeObjectURL(url),10000);
-}
-$('export').onclick=download;
-$('import').onclick=()=>$('importFile').click();
-$('importFile').onchange=async e=>{
-  const file=e.target.files[0];if(!file)return;
-  try{
-    if(file.size>15*1024*1024)throw Error('فایل بیش از حد بزرگ است.');
-    const imported=validate(JSON.parse(await file.text()));
-    if(!confirm('اطلاعات فعلی با این پشتیبان جایگزین شوند؟ پیش از ادامه از اطلاعات فعلی پشتیبان بگیر.'))return;
-    const previous=state;
-    try{
-      localStorage.setItem(KEY,JSON.stringify(imported));
-    }catch(err){
-      state=previous;
-      throw Error('ذخیره پشتیبان در مرورگر ممکن نشد؛ اطلاعات فعلی جایگزین نشد.');
-    }
-    state=imported;storageLocked=false;storageError='';render();
-    alert('پشتیبان بازیابی شد.');
-  }catch(err){alert(err.message||'بازیابی انجام نشد.')}
-  finally{e.target.value=''}
-};
-$('reset').onclick=()=>{
-  if(prompt('این کار برگشت‌پذیر نیست. برای حذف اطلاعات همین نسخه، کلمه «پاک» را وارد کن:')!=='پاک')return;
-  try{localStorage.removeItem(KEY)}
-  catch(e){alert('دسترسی به حافظه مرورگر ممکن نیست.');return}
-  state=defaults();storageLocked=false;storageError='';selected=today();change();
-};
-let lastToday=today();
-setInterval(()=>{
-  const now=today();
-  if(now!==lastToday){
-    lastToday=now;
-    renderHeader();renderTasks();renderHabits();renderCare();renderLesson();renderCalendar();
-  }
-},60000);
-render();
-</script>
-</body>
-</html>
+      <div class="row between">
+        <b class="grow">${esc(x.title)}</b>
+        <button class="icon" data-action="delete-library" data-kind="${kind}" data-id="${esc(x.id)}"
+          aria-label="حذف ${esc(x.title)}">×</button>
